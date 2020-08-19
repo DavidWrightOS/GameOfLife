@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet var gridView: UIView!
+    @IBOutlet var gridView: GridView!
     @IBOutlet var generationCountLabel: UILabel!
     
     // MARK: - Lifecycle
