@@ -50,7 +50,7 @@
                                     <constraint firstAttribute="bottom" secondItem="yDF-UE-nUH" secondAttribute="bottom" constant="12" id="efV-m2-wbb"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generation: 23" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOh-IL-jh6" userLabel="GenerationLabel">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generation: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOh-IL-jh6" userLabel="GenerationLabel">
                                 <rect key="frame" x="16" y="128" width="343" height="19"/>
                                 <fontDescription key="fontDescription" name="Courier-Oblique" family="Courier" pointSize="19"/>
                                 <nil key="textColor"/>
@@ -203,52 +203,52 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="1." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lAs-od-2OU" userLabel="1Label">
-                                <rect key="frame" x="16" y="173.33333333333334" width="14.666666666666664" height="20.333333333333343"/>
+                                <rect key="frame" x="24" y="173.33333333333334" width="14.666666666666664" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="2." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlR-3G-we4" userLabel="2Label">
-                                <rect key="frame" x="16" y="222" width="14.666666666666664" height="20.333333333333343"/>
+                                <rect key="frame" x="24" y="222" width="14.666666666666664" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="3." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c8e-Cw-DRG" userLabel="3Label">
-                                <rect key="frame" x="16" y="270.66666666666669" width="14.666666666666664" height="20.333333333333314"/>
+                                <rect key="frame" x="24" y="270.66666666666669" width="14.666666666666664" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="4." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q01-Mq-jIW" userLabel="4Label">
-                                <rect key="frame" x="16" y="319.33333333333331" width="14.666666666666664" height="20.333333333333314"/>
+                                <rect key="frame" x="24" y="319.33333333333331" width="14.666666666666664" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="e8A-XA-4d1" userLabel="RuleStackView">
-                                <rect key="frame" x="42.666666666666657" y="173.66666666666669" width="316.33333333333337" height="186.66666666666669"/>
+                                <rect key="frame" x="50.666666666666657" y="173.66666666666669" width="308.33333333333337" height="186.66666666666669"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any live cell with fewer than two live neighbours dies." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ors-BI-9KM" userLabel="Rule1Label">
-                                        <rect key="frame" x="0.0" y="0.0" width="316.33333333333331" height="40.666666666666664"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="308.33333333333331" height="40.666666666666664"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any live cell with two or three live neighbours lives." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S10-qn-ztW" userLabel="Rule2Label">
-                                        <rect key="frame" x="0.0" y="48.666666666666686" width="316.33333333333331" height="40.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="48.666666666666686" width="308.33333333333331" height="40.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any live cell with more than three live neighbours dies." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qgC-Ce-3mX" userLabel="Rule3Label">
-                                        <rect key="frame" x="0.0" y="97.333333333333343" width="316.33333333333331" height="40.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="97.333333333333343" width="308.33333333333331" height="40.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Any dead cell with exactly three live neighbours becomes a live cell." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0t-Al-YTm" userLabel="Rule4Label">
-                                        <rect key="frame" x="0.0" y="146.00000000000003" width="316.33333333333331" height="40.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="146.00000000000003" width="308.33333333333331" height="40.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -271,7 +271,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="lAs-od-2OU" firstAttribute="leading" secondItem="Ggy-ZI-YbX" secondAttribute="leading" constant="16" id="3fx-gl-V6Z"/>
+                            <constraint firstItem="lAs-od-2OU" firstAttribute="leading" secondItem="Ggy-ZI-YbX" secondAttribute="leading" constant="24" id="3fx-gl-V6Z"/>
                             <constraint firstItem="zlR-3G-we4" firstAttribute="trailing" secondItem="lAs-od-2OU" secondAttribute="trailing" id="5M1-RO-EPw"/>
                             <constraint firstItem="ePB-Gy-YoF" firstAttribute="leading" secondItem="Ggy-ZI-YbX" secondAttribute="leading" constant="16" id="7ol-zv-3OJ"/>
                             <constraint firstItem="zlR-3G-we4" firstAttribute="leading" secondItem="lAs-od-2OU" secondAttribute="leading" id="AeP-ml-uUO"/>
