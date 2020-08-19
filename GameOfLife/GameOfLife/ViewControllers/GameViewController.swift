@@ -20,7 +20,8 @@ class GameViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    
+    @IBOutlet var gridView: UIView!
+    @IBOutlet var generationCountLabel: UILabel!
     
     // MARK: - Lifecycle
     
@@ -31,6 +32,35 @@ class GameViewController: UIViewController {
     
     // MARK: - IBActions
     
+    // Game Controls
     
+    @IBAction func playPauseButtonTapped(_ sender: UIButton) {
+        
+    }
     
+    @IBAction func advance1StepButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func stopButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    // Initial State Presets
+    
+    @IBAction func preset1ButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func preset2ButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func preset3ButtonTapped(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func preset4ButtonTapped(_ sender: UIButton) {
+        
+    }
 }

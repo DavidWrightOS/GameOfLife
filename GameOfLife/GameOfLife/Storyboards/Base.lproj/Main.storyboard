@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="GameOfLife" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="GameViewController" customModule="GameOfLife" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -75,6 +75,9 @@
                                         <state key="normal" image="playpause.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                         </state>
+                                        <connections>
+                                            <action selector="playPauseButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c9M-Hx-Py4"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMW-pu-vsv">
                                         <rect key="frame" x="121" y="12" width="133" height="40"/>
@@ -83,6 +86,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <state key="normal" title="Advance 1 Step"/>
+                                        <connections>
+                                            <action selector="advance1StepButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xCj-Gz-6jA"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DQd-Ws-1di" userLabel="StopButton">
                                         <rect key="frame" x="309" y="12" width="50" height="40"/>
@@ -93,6 +99,9 @@
                                         <state key="normal" image="stop.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                         </state>
+                                        <connections>
+                                            <action selector="stopButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jEQ-X2-Opg"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -119,6 +128,9 @@
                                         <state key="normal" title="Preset 1">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="preset1ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="riQ-tv-DnN"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8G-37-fNj">
                                         <rect key="frame" x="88.666666666666671" y="0.0" width="77.000000000000014" height="40"/>
@@ -128,6 +140,9 @@
                                         <state key="normal" title="Preset 2">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="preset2ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y9G-8e-cc5"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coQ-pI-A1R">
                                         <rect key="frame" x="177.66666666666666" y="0.0" width="76.666666666666657" height="40"/>
@@ -137,6 +152,9 @@
                                         <state key="normal" title="Preset 3">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="preset3ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OYO-TF-aBa"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1I-bq-Ocw">
                                         <rect key="frame" x="266.33333333333331" y="0.0" width="76.666666666666686" height="40"/>
@@ -146,6 +164,9 @@
                                         <state key="normal" title="Preset 4">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="preset4ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pZO-pP-oDI"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -175,6 +196,17 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="Bt7-AB-GoV"/>
+                    <connections>
+                        <outlet property="advance1StepButton" destination="SMW-pu-vsv" id="Yu4-GG-9vD"/>
+                        <outlet property="generationCountLabel" destination="bOh-IL-jh6" id="kRw-eC-r9k"/>
+                        <outlet property="gridView" destination="q2N-zF-YYC" id="dGp-D4-dDN"/>
+                        <outlet property="playPauseButton" destination="ta5-sM-jPW" id="Nzx-cq-fiw"/>
+                        <outlet property="preset1Button" destination="bjy-KO-TEy" id="GVZ-wv-2Lj"/>
+                        <outlet property="preset2Button" destination="c8G-37-fNj" id="f8C-VL-Ev8"/>
+                        <outlet property="preset3Button" destination="coQ-pI-A1R" id="DUb-vs-qbn"/>
+                        <outlet property="preset4Button" destination="Q1I-bq-Ocw" id="eqP-AJ-EML"/>
+                        <outlet property="stopButton" destination="DQd-Ws-1di" id="ZyU-Ql-5Mi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
