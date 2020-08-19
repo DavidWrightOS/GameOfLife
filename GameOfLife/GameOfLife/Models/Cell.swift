@@ -8,6 +8,16 @@
 
 import Foundation
 
+enum State {
+    case alive
+    case dead
+}
+
 struct Cell {
+    
+    // MARK: - Properties
+    let x: Int
+    let y: Int
+    var state: State
     
 }
