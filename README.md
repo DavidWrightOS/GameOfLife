@@ -2,24 +2,10 @@
 
 ---
 
-**NOTE: This is not a data science project.** If you're in the data
-science track and want to do a DS-specific project, jump to the [Data
-Science Build Week
-Repo](https://github.com/LambdaSchool/CS-Data-Science-Build-Week-1).
-
----
-
 Welcome to John Conway's "Game of Life"! This is a computer science
 classic from 1970, a program that simulates a _cellular automaton_
 (plural _automata_). It has connections to all kinds of different
 aspects of computer science and nature.
-
-Over the course of this week, students will work on creating their own
-application in which users will be able to run different "Game of Life"
-scenarios. This module leads the reader through the fundamentals of
-Conways's "Game of Life" and will guide them through the process of
-creating an app utilizing tools and frameworks that have been taught
-over the course of their specific track.
 
 ![example-patterns](https://media.giphy.com/media/4VVZTvTqzRR0BUwNIH/giphy.gif)
 
@@ -27,24 +13,7 @@ over the course of their specific track.
 
 ## Collaboration
 
-This is a solo project, not a team project. Each person will be expected
-to make their own repo and do their own coding.
-
-That said, we _encourage_ cooperation during the Understand, Plan, and
-Reflect phases of UPER. It's the Execution that everyone will have to do
-their own work for.
-
-This doesn't mean you can't ask for help during coding. Definitely feel
-free to reach out. But there won't be any pair programming or splitting
-the project into different chunks for different people.
-
-## Clone this repo?
-
-Or start from scratch?
-
-Recommend starting from scratch. That way you'll have a clean commit
-history and won't have to worry about merging changes from this
-informational repo in yours.
+This is a solo project.
 
 ## Objectives
 
@@ -82,9 +51,9 @@ of this cellular automaton. Include necessary components, such as:
 * Cell objects or components that, at a minimum, should have:
   * Properties
     * current state: (alive, dead), (black, white)
-    * Clickable/Tappable:
-      * can be clicked to allow user to setup initial cell configuration
-      * should NOT be clickable while simulation is running
+    * Tappable:
+      * can be tapped to allow user to setup initial cell configuration
+      * should NOT be tappable while simulation is running
     * Behaviors
       * Toggle state functionality: switch between alive & dead either
         because user manually toggled cell before starting simulation or
@@ -144,36 +113,18 @@ Implement at least 3 of the following features:
 ## Stretch Goals
 
 * Implement 2+ additional custom features, above
-* Deploy your app to a hosting service or, for iOS, to TestFlight (or
-  the App Store!). Web devs can see [more deployment info
-  here](resources/web/deployment).
+* Deploy your app to TestFlight (or the App Store!).
 * Write a how-to guide or blog post that walks readers through the
   work you did to implement your project
 * Expand your simulation into the third dimension. Google `3D Conways
-  Life`. Google for how to do 3D stuff on your platform. Web users might
-  check out [3D-ThreeJS](https://github.com/LambdaSchool/3D-ThreeJS),
-  and iOS might look at [SceneKit](https://developer.apple.com/scenekit/).
+  Life`. Google for how to do 3D stuff on your platform. You might look at [SceneKit](https://developer.apple.com/scenekit/).
 * Explore alternate algorithms for finding the nth generation, such
   as [Hashlife](https://en.wikipedia.org/wiki/Hashlife)
 
 ## Sample Wireframe
 
-Example wireframes here. _This is only one possible layout. You can use
-any layout you come up with, as long as it completes MVP._
-
-We encourage you to be creative with your presentation and make it your
-own.
-
-### Mobile
-
-iOS example, could also inspire mobile web.
-
-![wireframe](resources/ios/game-of-life-iOS-mock-1.png)
-![wireframe](resources/ios/game-of-life-iOS-mock-2.png)
-
-### Desktop/Tablet
-
-![wireframe](wireframes/wireframe_1.png)
+![wireframe](resources/game-of-life-iOS-mock-1.png)
+![wireframe](resources/game-of-life-iOS-mock-2.png)
 
 
 ## Code and Repo Quality
@@ -229,12 +180,8 @@ requirements AND implements one of the above stretch goals.**
 Channels for help that's about your specific technologies, if the TLs
 and/or instructor doesn't have enough knowledge in that area.
 
-* DS: Your cohort channel
-* iOS: #ios_help
-* Web: Your cohort channel
+* #ios_help
 
 ## Additional Resources
-
-For various platforms:
 
 * [Resources](resources/)
