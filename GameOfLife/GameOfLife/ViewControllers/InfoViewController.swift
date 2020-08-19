@@ -10,7 +10,7 @@ import UIKit
 
 class InfoViewController: UIViewController {
     
-    // MARK: - IBOutlets
-    
-    
+    @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

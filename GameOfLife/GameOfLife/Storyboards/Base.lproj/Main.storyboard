@@ -197,25 +197,18 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="Bt7-AB-GoV"/>
                     <connections>
-                        <outlet property="advance1StepButton" destination="SMW-pu-vsv" id="Yu4-GG-9vD"/>
                         <outlet property="generationCountLabel" destination="bOh-IL-jh6" id="kRw-eC-r9k"/>
                         <outlet property="gridView" destination="q2N-zF-YYC" id="dGp-D4-dDN"/>
-                        <outlet property="playPauseButton" destination="ta5-sM-jPW" id="Nzx-cq-fiw"/>
-                        <outlet property="preset1Button" destination="bjy-KO-TEy" id="GVZ-wv-2Lj"/>
-                        <outlet property="preset2Button" destination="c8G-37-fNj" id="f8C-VL-Ev8"/>
-                        <outlet property="preset3Button" destination="coQ-pI-A1R" id="DUb-vs-qbn"/>
-                        <outlet property="preset4Button" destination="Q1I-bq-Ocw" id="eqP-AJ-EML"/>
-                        <outlet property="stopButton" destination="DQd-Ws-1di" id="ZyU-Ql-5Mi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="137.94642857142856"/>
         </scene>
-        <!--View Controller-->
+        <!--Info View Controller-->
         <scene sceneID="wYH-aw-8Wz">
             <objects>
-                <viewController id="mg7-Vq-3vw" sceneMemberID="viewController">
+                <viewController id="mg7-Vq-3vw" customClass="InfoViewController" customModule="GameOfLife" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="THJ-Ne-xf9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -224,7 +217,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
                                 <items>
                                     <navigationItem title="About" id="ayC-zo-rlb">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="sjN-7W-hUF"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="sjN-7W-hUF">
+                                            <connections>
+                                                <action selector="doneButtonTapped:" destination="mg7-Vq-3vw" id="B2d-jf-fcJ"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
