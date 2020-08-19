@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		631E784824ED0C94006B1155 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E784724ED0C94006B1155 /* GameViewController.swift */; };
 		631E784A24ED10D7006B1155 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E784924ED10D7006B1155 /* InfoViewController.swift */; };
+		631E784C24ED12D5006B1155 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E784B24ED12D5006B1155 /* Cell.swift */; };
 		63668C1424EBBE0000084403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63668C1324EBBE0000084403 /* AppDelegate.swift */; };
 		63668C1624EBBE0000084403 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63668C1524EBBE0000084403 /* SceneDelegate.swift */; };
 		63668C1B24EBBE0000084403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63668C1924EBBE0000084403 /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 /* Begin PBXFileReference section */
 		631E784724ED0C94006B1155 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		631E784924ED10D7006B1155 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		631E784B24ED12D5006B1155 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		63668C1024EBBE0000084403 /* GameOfLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameOfLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63668C1324EBBE0000084403 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63668C1524EBBE0000084403 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		631E784524ED0B6B006B1155 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				631E784B24ED12D5006B1155 /* Cell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -175,6 +178,7 @@
 			files = (
 				63668C1424EBBE0000084403 /* AppDelegate.swift in Sources */,
 				631E784824ED0C94006B1155 /* GameViewController.swift in Sources */,
+				631E784C24ED12D5006B1155 /* Cell.swift in Sources */,
 				631E784A24ED10D7006B1155 /* InfoViewController.swift in Sources */,
 				63668C1624EBBE0000084403 /* SceneDelegate.swift in Sources */,
 			);
