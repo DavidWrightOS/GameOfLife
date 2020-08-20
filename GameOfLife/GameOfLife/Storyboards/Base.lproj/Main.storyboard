@@ -72,9 +72,10 @@
                                             <constraint firstAttribute="height" constant="40" id="4mI-cU-id9"/>
                                             <constraint firstAttribute="width" constant="50" id="8F5-1T-9ES"/>
                                         </constraints>
-                                        <state key="normal" image="playpause.fill" catalog="system">
+                                        <state key="normal" image="play.fill" catalog="system">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="semibold"/>
                                         </state>
+                                        <state key="selected" image="pause.fill" catalog="system"/>
                                         <connections>
                                             <action selector="playPauseButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c9M-Hx-Py4"/>
                                         </connections>
@@ -199,6 +200,7 @@
                     <connections>
                         <outlet property="generationCountLabel" destination="bOh-IL-jh6" id="kRw-eC-r9k"/>
                         <outlet property="gridView" destination="q2N-zF-YYC" id="dGp-D4-dDN"/>
+                        <outlet property="playPauseButton" destination="ta5-sM-jPW" id="bSR-Oc-Q3Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -339,7 +341,8 @@
     </scenes>
     <resources>
         <image name="info.circle" catalog="system" width="128" height="121"/>
-        <image name="playpause.fill" catalog="system" width="128" height="73"/>
+        <image name="pause.fill" catalog="system" width="116" height="128"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
         <image name="stop.fill" catalog="system" width="128" height="113"/>
     </resources>
 </document>
