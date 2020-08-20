@@ -12,6 +12,7 @@
 		631E784C24ED12D5006B1155 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E784B24ED12D5006B1155 /* Cell.swift */; };
 		631E784E24ED1450006B1155 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E784D24ED1450006B1155 /* Grid.swift */; };
 		631E785124ED1E62006B1155 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E785024ED1E62006B1155 /* GridView.swift */; };
+		631E785424EE23F6006B1155 /* GridController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631E785324EE23F6006B1155 /* GridController.swift */; };
 		63668C1424EBBE0000084403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63668C1324EBBE0000084403 /* AppDelegate.swift */; };
 		63668C1624EBBE0000084403 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63668C1524EBBE0000084403 /* SceneDelegate.swift */; };
 		63668C1B24EBBE0000084403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63668C1924EBBE0000084403 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 		631E784B24ED12D5006B1155 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		631E784D24ED1450006B1155 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		631E785024ED1E62006B1155 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		631E785324EE23F6006B1155 /* GridController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridController.swift; sourceTree = "<group>"; };
 		63668C1024EBBE0000084403 /* GameOfLife.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameOfLife.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63668C1324EBBE0000084403 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63668C1524EBBE0000084403 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,13 +56,13 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		631E784324ED0A7F006B1155 /* ViewControllers */ = {
+		631E784324ED0A7F006B1155 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				631E784724ED0C94006B1155 /* GameViewController.swift */,
 				631E784924ED10D7006B1155 /* InfoViewController.swift */,
 			);
-			path = ViewControllers;
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		631E784424ED0A95006B1155 /* Resources */ = {
@@ -91,6 +93,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		631E785224EE2395006B1155 /* Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+				631E785324EE23F6006B1155 /* GridController.swift */,
+			);
+			path = "Model Controller";
+			sourceTree = "<group>";
+		};
 		63668C0724EBBE0000084403 = {
 			isa = PBXGroup;
 			children = (
@@ -111,8 +121,9 @@
 			isa = PBXGroup;
 			children = (
 				631E784524ED0B6B006B1155 /* Models */,
+				631E785224EE2395006B1155 /* Model Controller */,
 				631E784F24ED1E3D006B1155 /* Views */,
-				631E784324ED0A7F006B1155 /* ViewControllers */,
+				631E784324ED0A7F006B1155 /* View Controllers */,
 				631E784224ED0A71006B1155 /* Storyboards */,
 				631E784424ED0A95006B1155 /* Resources */,
 			);
@@ -191,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63668C1424EBBE0000084403 /* AppDelegate.swift in Sources */,
+				631E785424EE23F6006B1155 /* GridController.swift in Sources */,
 				631E784824ED0C94006B1155 /* GameViewController.swift in Sources */,
 				631E784C24ED12D5006B1155 /* Cell.swift in Sources */,
 				631E785124ED1E62006B1155 /* GridView.swift in Sources */,
