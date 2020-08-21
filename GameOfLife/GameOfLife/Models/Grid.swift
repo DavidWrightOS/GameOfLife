@@ -25,8 +25,8 @@ struct Grid {
         if let cells = cells {
             self.cells = cells
         } else {
-            for x in 0..<width {
-                for y in 0..<height {
+            for y in 0..<width {
+                for x in 0..<height {
                     let randomState = Int.random(in: 0...5)
                     let cell = Cell(x: x, y: y, state: randomState == 0 ? .alive : .dead)
                     self.cells.append(cell)

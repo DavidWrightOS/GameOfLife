@@ -72,8 +72,8 @@ class GridController {
     func neighbors(for cell: Cell) -> [Cell] {
         var neighbors = [Cell?]()
         
-        for dx in -1...1 {
-            for dy in -1...1 {
+        for dy in -1...1 {
+            for dx in -1...1 {
                 guard !(dx == 0 && dy == 0) else { continue }
                 let neighbor = grid.cellAt(x: cell.x + dx, y: cell.y + dy)
                 neighbors.append(neighbor)
