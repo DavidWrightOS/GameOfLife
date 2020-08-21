@@ -38,13 +38,12 @@ class GameViewController: UIViewController {
     }
     
     // MARK: - Timer
-    var t = 0
+    
     func startTimer() {
         timer?.invalidate()
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.10, repeats: true) { [weak self] _ in
             guard let self = self else { return }
-            print(self.t); self.t += 1
             self.updateViews()
         }
     }
@@ -74,11 +73,12 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func stopButtonTapped(_ sender: UIButton) {
-        guard isRunning else { return }
         cancelTimer()
+        isRunning = false
         playPauseButton.isSelected = false
         gridController = GridController(width: gridController.grid.width,
                                         height: gridController.grid.height)
+        updateViews()
     }
     
     // Initial State Presets
