@@ -44,3 +44,13 @@ struct Grid {
         return cells[y * width + x]
     }
 }
+
+extension Grid: CustomStringConvertible {
+    var description: String {
+        var description: String = ""
+        for x in 0..<height {
+            description += cells[x*width..<(x*width + width)].compactMap { $0.state == .alive ? " ◼︎ " : " . " }.joined() + "\n"
+        }
+        return description + "\n"
+    }
+}
