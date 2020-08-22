@@ -55,6 +55,14 @@ class GameViewController: UIViewController {
     
     // MARK: - IBActions
     
+    @IBAction func infoButtonTapped(_ sender: UIButton) {
+        cancelTimer()
+        let infoVC = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
+        infoVC.delegate = self
+        present(infoVC, animated: true, completion: nil)
+    }
+    
     // Game Controls
     
     @IBAction func playPauseButtonTapped(_ sender: UIButton) {
@@ -97,5 +105,13 @@ class GameViewController: UIViewController {
     
     @IBAction func preset4ButtonTapped(_ sender: UIButton) {
         
+    }
+}
+
+extension GameViewController: InfoViewControllerDelegate {
+    func didDismissInfoViewController() {
+        if isRunning {
+            startTimer()
+        }
     }
 }

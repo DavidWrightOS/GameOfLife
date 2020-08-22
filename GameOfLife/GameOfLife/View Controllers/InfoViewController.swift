@@ -8,9 +8,17 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
+protocol InfoViewControllerDelegate: class {
+    func didDismissInfoViewController()
+}
+
+class InfoViewController: UIViewController, UIAdaptivePresentationControllerDelegate {
+    
+    weak var delegate: InfoViewControllerDelegate?
     
     @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            self.delegate?.didDismissInfoViewController()
+        }
     }
 }
