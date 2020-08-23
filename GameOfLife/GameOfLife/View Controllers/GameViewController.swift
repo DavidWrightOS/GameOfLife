@@ -28,9 +28,10 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        gridView.grid = gridController.grid
     }
     
-    func updateViews() {
+    func advanceOneGeneration() {
         gridView.grid = gridController.grid
         generationCountLabel.text = "Generation: \(gridController.generationCount)"
         gridController.loadNextGeneration()
@@ -43,7 +44,7 @@ class GameViewController: UIViewController {
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.10, repeats: true) { [weak self] _ in
             guard let self = self else { return }
-            self.updateViews()
+            self.advanceOneGeneration()
         }
     }
     
@@ -67,7 +68,7 @@ class GameViewController: UIViewController {
     @IBAction func playPauseButtonTapped(_ sender: UIButton) {
         isRunning.toggle()
         playPauseButton.isSelected = isRunning
-        updateViews()
+        advanceOneGeneration()
         if isRunning {
             startTimer()
         } else {
@@ -76,7 +77,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func advance1StepButtonTapped(_ sender: UIButton) {
-        updateViews()
+        advanceOneGeneration()
     }
     
     @IBAction func stopButtonTapped(_ sender: UIButton) {
@@ -85,7 +86,7 @@ class GameViewController: UIViewController {
         playPauseButton.isSelected = false
         gridController = GridController(width: gridController.grid.width,
                                         height: gridController.grid.height)
-        updateViews()
+        advanceOneGeneration()
     }
     
     // Initial State Presets

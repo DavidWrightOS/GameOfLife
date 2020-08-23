@@ -12,14 +12,15 @@ class GridView: UIView {
     
     // MARK: - Properties
     
-    var grid = Grid(width: 25, height: 25) {
+    var grid: Grid? {
         didSet {
-            self.setNeedsDisplay()
+            setNeedsDisplay()
         }
     }
     
     var cellSize: CGFloat {
-        self.frame.width / CGFloat(grid.width)
+        guard let grid = grid else { return 0 }
+        return frame.width / CGFloat(grid.width)
     }
     
     // MARK: - Initializers
@@ -42,6 +43,7 @@ class GridView: UIView {
     // MARK: - Drawing
     
     public override func draw(_ rect: CGRect) {
+        guard let grid = grid else { return }
         let context = UIGraphicsGetCurrentContext()
         
         context?.saveGState()

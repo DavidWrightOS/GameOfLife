@@ -18,7 +18,7 @@ struct Grid {
     
     // MARK: - Initializer
     
-    public init(width: Int, height: Int, cells: [Cell]? = nil) {
+    public init(width: Int = 25, height: Int = 25, cells: [Cell]? = nil) {
         self.width = width
         self.height = height
         
