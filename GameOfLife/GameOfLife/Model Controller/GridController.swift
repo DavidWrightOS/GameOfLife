@@ -117,7 +117,17 @@ class GridController {
             }
             DispatchQueue.main.async {
                 completion(nextGenerationCells)
+    
+    func setRandomInitialState() {
+        var randomCells = [Cell]()
+        for y in 0..<grid.width {
+            for x in 0..<grid.height {
+                let randomState = Int.random(in: 0...5)
+                let cell = Cell(x: x, y: y, state: randomState == 0 ? .alive : .dead)
+                randomCells.append(cell)
             }
         }
+        grid.cells = randomCells
+        generationCount = 0
     }
 }

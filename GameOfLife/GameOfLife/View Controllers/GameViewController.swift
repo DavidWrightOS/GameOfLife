@@ -120,10 +120,23 @@ class GameViewController: UIViewController {
         updateViews()
     }
     
+    func resetGrid() {
+        cancelTimer()
+        isRunning = false
+        playPauseButton.isSelected = false
+        gridController = GridController(width: gridController.grid.width,
+                                        height: gridController.grid.height)
+        updateViews()
+    }
+    
     // Initial State Presets
     
     @IBAction func preset1ButtonTapped(_ sender: UIButton) {
-        
+        cancelTimer()
+        isRunning = false
+        playPauseButton.isSelected = false
+        gridController.setRandomInitialState()
+        updateViews()
     }
     
     @IBAction func preset2ButtonTapped(_ sender: UIButton) {
