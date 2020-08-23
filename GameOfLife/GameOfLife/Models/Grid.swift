@@ -56,6 +56,15 @@ struct Grid {
         }
         return true
     }
+    
+    @discardableResult
+    mutating func setStateForCellAt(x: Int, y: Int, state: State) -> Bool {
+        guard x >= 0, x < width,
+        y >= 0, y < height else { return false }
+        let index = y * width + x
+        cells[index].state = state
+        return true
+    }
 }
 
 extension Grid: CustomStringConvertible {
