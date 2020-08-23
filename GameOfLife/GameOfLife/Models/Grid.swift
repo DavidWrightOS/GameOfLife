@@ -43,6 +43,19 @@ struct Grid {
         
         return cells[y * width + x]
     }
+    
+    @discardableResult
+    mutating func toggleStateForCellAt(x: Int, y: Int) -> Bool {
+        guard x >= 0, x < width,
+        y >= 0, y < height else { return false }
+        let index = y * width + x
+        if cells[index].state == .alive {
+            cells[index].state = .dead
+        } else {
+            cells[index].state = .alive
+        }
+        return true
+    }
 }
 
 extension Grid: CustomStringConvertible {

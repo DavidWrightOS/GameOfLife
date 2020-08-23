@@ -31,10 +31,29 @@ class GameViewController: UIViewController {
         gridView.grid = gridController.grid
     }
     
-    func advanceOneGeneration() {
+    // MARK: - Methods
+    
+    func updateViews() {
         gridView.grid = gridController.grid
         generationCountLabel.text = "Generation: \(gridController.generationCount)"
+    }
+    
+    func advanceOneGeneration() {
         gridController.loadNextGeneration()
+        updateViews()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard gridController.generationCount == 0 else { return }
+        guard let point = touches.first?.location(in: gridView),
+            gridView.bounds.contains(point) else { return }
+        
+        let x = Int(point.x / gridView.cellSize)
+        let y = Int(point.y / gridView.cellSize)
+
+        
+        gridController.grid.toggleStateForCellAt(x: x, y: y)
+        gridView.grid?.toggleStateForCellAt(x: x, y: y)
     }
     
     // MARK: - Timer
@@ -86,7 +105,7 @@ class GameViewController: UIViewController {
         playPauseButton.isSelected = false
         gridController = GridController(width: gridController.grid.width,
                                         height: gridController.grid.height)
-        advanceOneGeneration()
+        updateViews()
     }
     
     // Initial State Presets
