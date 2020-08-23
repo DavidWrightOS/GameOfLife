@@ -28,7 +28,6 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        gridView = GridView(viewWidth: view.frame.width)
     }
     
     func updateViews() {
