@@ -25,13 +25,6 @@ class GridView: UIView {
     
     // MARK: - Initializers
     
-    public convenience init(viewWidth: CGFloat, gridWidth: Int = 25, gridHeight: Int = 25) {
-        let viewHeight = viewWidth * CGFloat(gridHeight) / CGFloat(gridWidth)
-        let frame = CGRect(x: 0, y: 0, width: viewWidth, height: viewHeight)
-        self.init(frame: frame)
-        self.grid = Grid(width: gridWidth, height: gridHeight)
-    }
-    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -48,11 +41,10 @@ class GridView: UIView {
         
         context?.saveGState()
         
-        for cell in grid.cells {
+        for cell in grid.cells where cell.state == .alive {
             let rect = CGRect(x: CGFloat(cell.x) * cellSize, y: CGFloat(cell.y) * cellSize, width: cellSize, height: cellSize)
-            let color = cell.state == .alive ? UIColor.black.cgColor: UIColor.systemGray4.cgColor
             context?.addRect(rect)
-            context?.setFillColor(color)
+            context?.setFillColor(UIColor.black.cgColor)
             context?.fill(rect)
         }
         
