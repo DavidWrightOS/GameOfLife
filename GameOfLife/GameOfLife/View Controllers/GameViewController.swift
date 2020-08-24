@@ -12,7 +12,7 @@ class GameViewController: UIViewController {
     
     // MARK: - Properties
     
-    var gridController = GridController()
+    var gridController = GridController(width: 40, height: 40)
     
     var isRunning = false
     
