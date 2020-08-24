@@ -190,7 +190,26 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func preset4ButtonTapped(_ sender: UIButton) {
+        resetGrid()
+        let xOffset = (gridController.grid.width - 15) / 2
+        let yOffset = (gridController.grid.height - 15) / 2
         
+        let exploderCoordinates: [(x: Int, y: Int)] = [
+            (7, 6),
+            (6, 7), (7, 7), (8, 7),
+            (6, 8), (8, 8),
+            (7, 9),
+        ]
+        
+        let centeredExploderCoordinates = exploderCoordinates.map { (x: $0.x + xOffset, y: $0.y + yOffset) }
+                
+        for coordinate in centeredExploderCoordinates {
+            gridController.grid.setStateForCellAt(x: coordinate.x,
+                                                  y: coordinate.y,
+                                                  state: .alive)
+        }
+        
+        updateViews()
     }
 }
 
