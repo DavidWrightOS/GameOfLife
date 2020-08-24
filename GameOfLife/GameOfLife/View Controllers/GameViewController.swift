@@ -168,7 +168,25 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func preset3ButtonTapped(_ sender: UIButton) {
+        resetGrid()
+        let xOffset = (gridController.grid.width - 16) / 2
+        let yOffset = (gridController.grid.height - 9) / 2
         
+        let pentadecathlonCoordinates: [(x: Int, y: Int)] = [
+            (5, 3), (10, 3),
+            (3, 4), (4, 4), (6, 4), (7, 4), (8, 4), (9, 4), (11, 4), (12, 4),
+            (5, 5), (10, 5),
+        ]
+        
+        let centeredPentadecathlonCoordinates = pentadecathlonCoordinates.map { (x: $0.x + xOffset, y: $0.y + yOffset) }
+                
+        for coordinate in centeredPentadecathlonCoordinates {
+            gridController.grid.setStateForCellAt(x: coordinate.x,
+                                                  y: coordinate.y,
+                                                  state: .alive)
+        }
+        
+        updateViews()
     }
     
     @IBAction func preset4ButtonTapped(_ sender: UIButton) {
