@@ -171,16 +171,70 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0Ry-zM-joZ" userLabel="StepperStackView">
+                                <rect key="frame" x="16" y="602" width="343" height="86"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="twH-kj-2wK" userLabel="SizeStackView">
+                                        <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="86"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grid Size" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e69-ks-xIu">
+                                                <rect key="frame" x="53.333333333333329" y="0.0" width="60.666666666666671" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25 x 25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QFO-Bz-FUt">
+                                                <rect key="frame" x="48.000000000000007" y="27" width="71.666666666666686" height="17"/>
+                                                <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minimumValue="25" maximumValue="125" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="kbM-2V-E1E">
+                                                <rect key="frame" x="36.666666666666657" y="54" width="94" height="32"/>
+                                                <connections>
+                                                    <action selector="gridSizeStepperValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="YMQ-Bm-1Pq"/>
+                                                </connections>
+                                            </stepper>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ix4-Va-kda" userLabel="SpeedStackView">
+                                        <rect key="frame" x="175.66666666666663" y="0.0" width="167.33333333333337" height="86"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Speed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rO-fa-LKC">
+                                                <rect key="frame" x="40.999999999999993" y="0.0" width="85.333333333333314" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                <color key="textColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xa-dg-uZ3">
+                                                <rect key="frame" x="78.333333333333343" y="27" width="10.333333333333329" height="17"/>
+                                                <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="6l1-pb-784">
+                                                <rect key="frame" x="36.666666666666686" y="54" width="94" height="32"/>
+                                                <connections>
+                                                    <action selector="gameSpeedStepperValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aPd-Wo-IKZ"/>
+                                                </connections>
+                                            </stepper>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bOh-IL-jh6" secondAttribute="trailing" constant="16" id="03M-2T-vCE"/>
                             <constraint firstItem="yDF-UE-nUH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="2dq-4P-s6n"/>
                             <constraint firstItem="bOh-IL-jh6" firstAttribute="top" secondItem="EiJ-6g-1hz" secondAttribute="bottom" constant="20" id="3El-tf-yPG"/>
+                            <constraint firstItem="kNs-4u-nsb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="0Ry-zM-joZ" secondAttribute="bottom" constant="20" id="BPm-Hu-wco"/>
+                            <constraint firstItem="0Ry-zM-joZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="D4O-E4-ZxC"/>
                             <constraint firstItem="kNs-4u-nsb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EBe-Gg-WtF"/>
                             <constraint firstItem="EiJ-6g-1hz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="FgJ-C2-v6n"/>
                             <constraint firstItem="EiJ-6g-1hz" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="GBT-22-pYi"/>
                             <constraint firstItem="q2N-zF-YYC" firstAttribute="top" secondItem="bOh-IL-jh6" secondAttribute="bottom" constant="8" id="H5j-BI-wZy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Ry-zM-joZ" secondAttribute="trailing" constant="16" id="QQq-ta-5OJ"/>
                             <constraint firstItem="EiJ-6g-1hz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="QzQ-qT-vDp"/>
                             <constraint firstAttribute="bottom" secondItem="kNs-4u-nsb" secondAttribute="bottom" id="Uza-df-sW3"/>
                             <constraint firstItem="q2N-zF-YYC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XZ0-9H-89Y"/>
@@ -188,6 +242,7 @@
                             <constraint firstItem="kNs-4u-nsb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dZV-52-TNg"/>
                             <constraint firstItem="a3U-yS-KwN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="knw-lC-Kak"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a3U-yS-KwN" secondAttribute="trailing" constant="16" id="l6E-jx-EAn"/>
+                            <constraint firstItem="0Ry-zM-joZ" firstAttribute="top" secondItem="a3U-yS-KwN" secondAttribute="bottom" constant="16" id="lqy-nM-oXp"/>
                             <constraint firstItem="a3U-yS-KwN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pVA-Fl-hdG"/>
                             <constraint firstItem="a3U-yS-KwN" firstAttribute="top" secondItem="q2N-zF-YYC" secondAttribute="bottom" constant="16" id="rmK-JV-2LA"/>
                             <constraint firstItem="bOh-IL-jh6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="t1x-Oc-rHu"/>
@@ -199,8 +254,10 @@
                     <navigationItem key="navigationItem" id="Bt7-AB-GoV"/>
                     <connections>
                         <outlet property="generationCountLabel" destination="bOh-IL-jh6" id="kRw-eC-r9k"/>
+                        <outlet property="gridSizeLabel" destination="QFO-Bz-FUt" id="9ee-mm-7G1"/>
                         <outlet property="gridView" destination="q2N-zF-YYC" id="dGp-D4-dDN"/>
                         <outlet property="playPauseButton" destination="ta5-sM-jPW" id="bSR-Oc-Q3Z"/>
+                        <outlet property="speedLabel" destination="7xa-dg-uZ3" id="fGB-P6-XeL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
