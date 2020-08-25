@@ -14,6 +14,12 @@ class GameViewController: UIViewController {
     
     var gridController = GridController(width: 40, height: 40)
     
+    var gameSpeed = 1.0 {
+        didSet {
+            updateGameSpeed()
+        }
+    }
+    
     var isRunning = false
     
     var timer: Timer?
@@ -23,6 +29,7 @@ class GameViewController: UIViewController {
     @IBOutlet var gridView: GridView!
     @IBOutlet var generationCountLabel: UILabel!
     @IBOutlet var playPauseButton: UIButton!
+    @IBOutlet var speedLabel: UILabel!
     
     // MARK: - Lifecycle
     
@@ -36,6 +43,13 @@ class GameViewController: UIViewController {
     func updateViews() {
         gridView.grid = gridController.grid
         generationCountLabel.text = "Generation: \(gridController.generationCount)"
+    }
+    
+    func updateGameSpeed() {
+        speedLabel.text = "\(Int(gameSpeed))"
+        guard isRunning else { return }
+        cancelTimer()
+        startTimer()
     }
     
     func advanceOneGeneration() {
@@ -73,7 +87,7 @@ class GameViewController: UIViewController {
     func startTimer() {
         timer?.invalidate()
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.10, repeats: true) { [weak self] _ in
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0 / gameSpeed, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.advanceOneGeneration()
         }
@@ -126,6 +140,12 @@ class GameViewController: UIViewController {
         playPauseButton.isSelected = false
         gridController = GridController(width: gridController.grid.width,
                                         height: gridController.grid.height)
+    }
+    
+    // Steppers
+    
+    @IBAction func gameSpeedStepperValueChanged(_ sender: UIStepper) {
+        gameSpeed = sender.value
     }
     
     // Initial State Presets
