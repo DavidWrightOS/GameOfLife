@@ -14,25 +14,13 @@ class GridController {
     
     var grid: Grid {
         didSet {
-            updateNextGenerationGridBuffer { nextGenCells in
-                self.nextGenerationGridBuffer = Grid(width: self.grid.width,
-                                                     height: self.grid.height,
-                                                     cells: nextGenCells)
-            }
+            updateNextGenerationGridBuffer()
         }
     }
     
-    var nextGenerationGridBuffer: Grid? {
-        didSet {
-            guard shouldUpdateGrid else { return }
-            shouldUpdateGrid = false
-            updateGrid()
-        }
-    }
-    
+    var nextGenerationGridBuffer: Grid!
     var generationCount = 0
-    var shouldUpdateGrid = false
-        
+    
     // MARK: - Initializers
     
     init(grid: Grid? = nil) {
@@ -41,10 +29,13 @@ class GridController {
         } else {
             self.grid = Grid(width: 25, height: 25)
         }
+        
+        updateNextGenerationGridBuffer()
     }
     
     init(width: Int, height: Int) {
         self.grid = Grid(width: width, height: height)
+        updateNextGenerationGridBuffer()
     }
     
     // MARK: - Methods
@@ -54,19 +45,8 @@ class GridController {
     }
     
     func updateGrid() {
-        guard let nextGenerationGrid = nextGenerationGridBuffer else {
-            shouldUpdateGrid = true
-            return
-        }
-        
-        grid = nextGenerationGrid
+        grid = nextGenerationGridBuffer
         generationCount += 1
-        
-        updateNextGenerationGridBuffer { nextGenCells in
-            self.nextGenerationGridBuffer = Grid(width: self.grid.width,
-                                                 height: self.grid.height,
-                                                 cells: nextGenCells)
-        }
     }
     
     func neighbors(for cell: Cell) -> [Cell] {
@@ -87,18 +67,16 @@ class GridController {
         neighbors(for: cell).filter { $0.state == .alive }.count
     }
     
-    // Rules for determining the next generation:
-    // 1. Any live cell with fewer than two live neighbors will die.
-    // 2. Any live cell with two or three live neighbors will live on to the next generation.
-    // 3. Any live cell with more than three live neighbors will die.
-    // 4. Any dead cell with exactly three live neighbors will become a live cell.
-    
-    func updateNextGenerationGridBuffer(completion: @escaping ([Cell]) -> Void) {
+    func updateNextGenerationGridBuffer() {
         let currentGenerationCells = grid.cells
         var nextGenerationCells = currentGenerationCells
-        nextGenerationGridBuffer = nil
         
-        DispatchQueue.global(qos: .background).async {
+        // Rules for determining the next generation:
+        // 1. Any live cell with fewer than two live neighbors will die.
+        // 2. Any live cell with two or three live neighbors will live on to the next generation.
+        // 3. Any live cell with more than three live neighbors will die.
+        // 4. Any dead cell with exactly three live neighbors will become a live cell.
+        
             for (index, currentCell) in currentGenerationCells.enumerated() {
                 switch self.numberOfAliveNeighbors(for: currentCell) {
                     
@@ -115,8 +93,9 @@ class GridController {
                     nextGenerationCells[index].state = .dead
                 }
             }
-            DispatchQueue.main.async {
-                completion(nextGenerationCells)
+        
+        self.nextGenerationGridBuffer = Grid(width: grid.width, height: grid.height, cells: nextGenerationCells)
+    }
     
     func setRandomInitialState() {
         var randomCells = [Cell]()
@@ -139,8 +118,8 @@ class GridController {
         
         for y in 0..<gridSize {
             for x in 0..<gridSize {
-                let cellState = currentGrid.cellAt(x: x-xOffset, y: y-yOffset)?.state
-                let cell = Cell(x: x, y: y, state: cellState ?? .dead)
+                let cellState = currentGrid.cellAt(x: x - xOffset, y: y - yOffset)?.state ?? .dead
+                let cell = Cell(x: x, y: y, state: cellState)
                 newCells.append(cell)
             }
         }
