@@ -11,23 +11,11 @@ import UIKit
 class GameViewController: UIViewController {
     
     // MARK: - Properties
-    
+
     var gridController = GridController(width: 25, height: 25)
-    
-    var gameSpeed = 1.0 {
-        didSet {
-            updateGameSpeed()
-        }
-    }
-    
-    var gridSize = 25 {
-        didSet {
-            updateGridSize()
-        }
-    }
-    
+    var gameSpeed = 1.0
+    var gridSize = 25
     var isRunning = false
-    
     var timer: Timer?
     
     // MARK: - IBOutlets
@@ -70,6 +58,8 @@ class GameViewController: UIViewController {
         updateViews()
     }
     
+    // Touch Gestures
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard gridController.generationCount == 0 else { return }
         guard let point = touches.first?.location(in: gridView),
@@ -77,7 +67,6 @@ class GameViewController: UIViewController {
         
         let x = Int(point.x / gridView.cellSize)
         let y = Int(point.y / gridView.cellSize)
-
         
         gridController.grid.toggleStateForCellAt(x: x, y: y)
         gridView.grid?.toggleStateForCellAt(x: x, y: y)
@@ -126,8 +115,8 @@ class GameViewController: UIViewController {
     @IBAction func playPauseButtonTapped(_ sender: UIButton) {
         isRunning.toggle()
         playPauseButton.isSelected = isRunning
-        advanceOneGeneration()
         if isRunning {
+            advanceOneGeneration()
             startTimer()
         } else {
             cancelTimer()
@@ -139,11 +128,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func stopButtonTapped(_ sender: UIButton) {
-        cancelTimer()
-        isRunning = false
-        playPauseButton.isSelected = false
-        gridController = GridController(width: gridController.grid.width,
-                                        height: gridController.grid.height)
+        resetGrid()
         updateViews()
     }
     
@@ -159,10 +144,12 @@ class GameViewController: UIViewController {
     
     @IBAction func gridSizeStepperValueChanged(_ sender: UIStepper) {
         gridSize = Int(sender.value)
+        updateGridSize()
     }
     
     @IBAction func gameSpeedStepperValueChanged(_ sender: UIStepper) {
         gameSpeed = sender.value
+        updateGameSpeed()
     }
     
     // Initial State Presets
@@ -218,9 +205,7 @@ class GameViewController: UIViewController {
         let centeredPentadecathlonCoordinates = pentadecathlonCoordinates.map { (x: $0.x + xOffset, y: $0.y + yOffset) }
                 
         for coordinate in centeredPentadecathlonCoordinates {
-            gridController.grid.setStateForCellAt(x: coordinate.x,
-                                                  y: coordinate.y,
-                                                  state: .alive)
+            gridController.grid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
         }
         
         updateViews()
@@ -241,9 +226,7 @@ class GameViewController: UIViewController {
         let centeredExploderCoordinates = exploderCoordinates.map { (x: $0.x + xOffset, y: $0.y + yOffset) }
                 
         for coordinate in centeredExploderCoordinates {
-            gridController.grid.setStateForCellAt(x: coordinate.x,
-                                                  y: coordinate.y,
-                                                  state: .alive)
+            gridController.grid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
         }
         
         updateViews()
