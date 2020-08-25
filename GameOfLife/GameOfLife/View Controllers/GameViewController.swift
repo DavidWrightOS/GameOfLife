@@ -12,11 +12,17 @@ class GameViewController: UIViewController {
     
     // MARK: - Properties
     
-    var gridController = GridController(width: 40, height: 40)
+    var gridController = GridController(width: 25, height: 25)
     
     var gameSpeed = 1.0 {
         didSet {
             updateGameSpeed()
+        }
+    }
+    
+    var gridSize = 25 {
+        didSet {
+            updateGridSize()
         }
     }
     
@@ -30,6 +36,7 @@ class GameViewController: UIViewController {
     @IBOutlet var generationCountLabel: UILabel!
     @IBOutlet var playPauseButton: UIButton!
     @IBOutlet var speedLabel: UILabel!
+    @IBOutlet var gridSizeLabel: UILabel!
     
     // MARK: - Lifecycle
     
@@ -50,6 +57,12 @@ class GameViewController: UIViewController {
         guard isRunning else { return }
         cancelTimer()
         startTimer()
+    }
+    
+    func updateGridSize() {
+        gridSizeLabel.text = "\(gridSize) x \(gridSize)"
+        gridController.updateGridSize(to: gridSize)
+        updateViews()
     }
     
     func advanceOneGeneration() {
@@ -143,6 +156,10 @@ class GameViewController: UIViewController {
     }
     
     // Steppers
+    
+    @IBAction func gridSizeStepperValueChanged(_ sender: UIStepper) {
+        gridSize = Int(sender.value)
+    }
     
     @IBAction func gameSpeedStepperValueChanged(_ sender: UIStepper) {
         gameSpeed = sender.value

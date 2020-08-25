@@ -130,4 +130,21 @@ class GridController {
         grid.cells = randomCells
         generationCount = 0
     }
+    
+    func updateGridSize(to gridSize: Int) {
+        let currentGrid = grid
+        let xOffset = (gridSize - currentGrid.width) / 2
+        let yOffset = (gridSize - currentGrid.height) / 2
+        var newCells = [Cell]()
+        
+        for y in 0..<gridSize {
+            for x in 0..<gridSize {
+                let cellState = currentGrid.cellAt(x: x-xOffset, y: y-yOffset)?.state
+                let cell = Cell(x: x, y: y, state: cellState ?? .dead)
+                newCells.append(cell)
+            }
+        }
+        
+        grid = Grid(width: gridSize, height: gridSize, cells: newCells)
+    }
 }
