@@ -99,6 +99,7 @@ class GridController {
     
     func setRandomInitialState() {
         var randomCells = [Cell]()
+        randomCells.reserveCapacity(cellCount)
         
         for _ in 0..<cellCount {
             let randomState: State = Int.random(in: 0...5) == 0 ? .alive : .dead
@@ -148,6 +149,7 @@ class GridController {
         let dy = (newSize - currentGrid.height) / 2
         
         var newCells = [Cell]()
+        newCells.reserveCapacity(newSize * newSize)
         
         for y in 0..<newSize {
             for x in 0..<newSize {
