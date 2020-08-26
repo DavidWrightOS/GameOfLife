@@ -41,10 +41,6 @@ class GridController {
     // MARK: - Methods
     
     func loadNextGeneration() {
-        updateGrid()
-    }
-    
-    func updateGrid() {
         grid = nextGenerationGridBuffer
         generationCount += 1
     }
@@ -107,6 +103,50 @@ class GridController {
             }
         }
         grid.cells = randomCells
+        generationCount = 0
+    }
+    
+    func setInitialState(stateIndex: Int) {
+        guard let initialState = InitialState(rawValue: stateIndex) else {
+            setRandomInitialState()
+            return
+        }
+        
+        setInitialState(initialState)
+    }
+    
+    func setInitialState(_ initialState: InitialState) {
+        guard let stateInfo = initialState.info else {
+            setRandomInitialState()
+            return
+        }
+        
+        var newGrid = deadGrid()
+        let xOffset = (grid.width - stateInfo.width) / 2
+        let yOffset = (grid.height - stateInfo.height) / 2
+        let centeredCoordinates = stateInfo.aliveCellsCoordinates.map { Coordinate(x: $0.x + xOffset,
+                                                                                   y: $0.y + yOffset) }
+        for coordinate in centeredCoordinates {
+            newGrid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
+        }
+        
+        grid = newGrid
+    }
+    
+    private func deadGrid() -> Grid {
+        var deadCells = [Cell]()
+        
+        for y in 0..<grid.height {
+            for x in 0..<grid.width {
+                deadCells.append(Cell(x: x, y: y, state: .dead))
+            }
+        }
+        
+        return Grid(width: grid.width, height: grid.height, cells: deadCells)
+    }
+    
+    func resetGrid() {
+        grid = deadGrid()
         generationCount = 0
     }
     
