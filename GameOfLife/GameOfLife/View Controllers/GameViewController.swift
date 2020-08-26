@@ -17,6 +17,7 @@ class GameViewController: UIViewController {
     var gridSize = 25
     var isRunning = false
     var timer: Timer?
+    var presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
     
     // MARK: - IBOutlets
     
@@ -25,12 +26,14 @@ class GameViewController: UIViewController {
     @IBOutlet var playPauseButton: UIButton!
     @IBOutlet var speedLabel: UILabel!
     @IBOutlet var gridSizeLabel: UILabel!
+    @IBOutlet var presetButtons: [UIButton]!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         gridController.setInitialState(.random)
+        updatePresetButtonTitles()
         updateGameSpeed()
         updateGridSize()
         gridView.grid = gridController.grid
@@ -54,6 +57,13 @@ class GameViewController: UIViewController {
         gridSizeLabel.text = "\(gridSize) x \(gridSize)"
         gridController.updateGridSize(to: gridSize)
         updateViews()
+    }
+    
+    func updatePresetButtonTitles() {
+        for button in presetButtons {
+            let presetDisplayName = presetStates[button.tag].info?.displayName ?? "Random"
+            button.setTitle(presetDisplayName, for: .normal)
+        }
     }
     
     func advanceOneGeneration() {
@@ -158,7 +168,7 @@ class GameViewController: UIViewController {
     
     @IBAction func presetButtonTapped(_ sender: UIButton) {
         stopTimer()
-        gridController.setInitialState(stateIndex: sender.tag)
+        gridController.setInitialState(presetStates[sender.tag])
         updateViews()
     }
 }
