@@ -13,6 +13,19 @@ struct Coordinate: Equatable {
     let y: Int
 }
 
+enum InitialState: Int {
+    case random, pulsar, pentadecathlon, exploder
+    
+    var info: PresetGridState? {
+        switch self {
+        case .pulsar: return PresetGridState.pulsar
+        case .pentadecathlon: return PresetGridState.pentadecathlon
+        case .exploder: return .exploder
+        default: return nil
+        }
+    }
+}
+
 struct PresetGridState {
     let width: Int
     let height: Int
