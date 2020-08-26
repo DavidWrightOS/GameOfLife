@@ -41,8 +41,14 @@ class GridView: UIView {
         
         context?.saveGState()
         
-        for cell in grid.cells where cell.state == .alive {
-            let rect = CGRect(x: CGFloat(cell.x) * cellSize, y: CGFloat(cell.y) * cellSize, width: cellSize, height: cellSize)
+        for (index, cell) in grid.cells.enumerated() where cell.state == .alive {
+            let cellCoordinate = grid.coordinateForCell(at: index)
+            
+            let rect = CGRect(x: CGFloat(cellCoordinate.x) * cellSize,
+                              y: CGFloat(cellCoordinate.y) * cellSize,
+                              width: cellSize,
+                              height: cellSize)
+            
             context?.addRect(rect)
             context?.setFillColor(UIColor.black.cgColor)
             context?.fill(rect)

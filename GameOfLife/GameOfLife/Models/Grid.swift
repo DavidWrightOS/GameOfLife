@@ -21,17 +21,7 @@ struct Grid {
     public init(width: Int = 25, height: Int = 25, cells: [Cell]? = nil) {
         self.width = width
         self.height = height
-        
-        if let cells = cells {
-            self.cells = cells
-        } else {
-            for y in 0..<width {
-                for x in 0..<height {
-                    let cell = Cell(x: x, y: y, state: .dead)
-                    self.cells.append(cell)
-                }
-            }
-        }
+        self.cells = cells ?? Array(repeating: Cell(), count: width * height)
     }
     
     // MARK: - Methods
@@ -41,6 +31,12 @@ struct Grid {
             y >= 0, y < height else { return nil }
         
         return cells[y * width + x]
+    }
+    
+    func coordinateForCell(at index: Int) -> Coordinate {
+        let x = index % width
+        let y = (index - x) / width
+        return Coordinate(x: x, y: y)
     }
     
     @discardableResult

@@ -14,7 +14,9 @@ enum State {
 }
 
 struct Cell {
-    let x: Int
-    let y: Int
     var state: State
+    
+    init(state: State = .dead) {
+        self.state = state
+    }
 }

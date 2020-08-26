@@ -20,6 +20,9 @@ class GridController {
     
     var nextGenerationGridBuffer: Grid!
     var generationCount = 0
+    var width: Int { grid.width }
+    var height: Int { grid.height }
+    var cellCount: Int { width * height }
     
     // MARK: - Initializers
     
@@ -45,13 +48,14 @@ class GridController {
         generationCount += 1
     }
     
-    func neighbors(for cell: Cell) -> [Cell] {
+    func neighborsForCell(at index: Int) -> [Cell] {
+        let cellCoordinate = grid.coordinateForCell(at: index)
         var neighbors = [Cell?]()
         
         for dy in -1...1 {
             for dx in -1...1 {
                 guard !(dx == 0 && dy == 0) else { continue }
-                let neighbor = grid.cellAt(x: cell.x + dx, y: cell.y + dy)
+                let neighbor = grid.cellAt(x: cellCoordinate.x + dx, y: cellCoordinate.y + dy)
                 neighbors.append(neighbor)
             }
         }
@@ -59,8 +63,8 @@ class GridController {
         return neighbors.compactMap { $0 }
     }
     
-    func numberOfAliveNeighbors(for cell: Cell) -> Int {
-        neighbors(for: cell).filter { $0.state == .alive }.count
+    func numberOfAliveNeighborsForCell(at index: Int) -> Int {
+        neighborsForCell(at: index).filter { $0.state == .alive }.count
     }
     
     func updateNextGenerationGridBuffer() {
@@ -74,7 +78,7 @@ class GridController {
         // 4. Any dead cell with exactly three live neighbors will become a live cell.
         
             for (index, currentCell) in currentGenerationCells.enumerated() {
-                switch self.numberOfAliveNeighbors(for: currentCell) {
+                switch self.numberOfAliveNeighborsForCell(at: index) {
                     
                 // Rule 2
                 case 2...3 where currentCell.state == .alive:
@@ -90,17 +94,15 @@ class GridController {
                 }
             }
         
-        self.nextGenerationGridBuffer = Grid(width: grid.width, height: grid.height, cells: nextGenerationCells)
+        self.nextGenerationGridBuffer = Grid(width: width, height: height, cells: nextGenerationCells)
     }
     
     func setRandomInitialState() {
         var randomCells = [Cell]()
-        for y in 0..<grid.width {
-            for x in 0..<grid.height {
-                let randomState = Int.random(in: 0...5)
-                let cell = Cell(x: x, y: y, state: randomState == 0 ? .alive : .dead)
-                randomCells.append(cell)
-            }
+        
+        for _ in 0..<cellCount {
+            let randomState: State = Int.random(in: 0...5) == 0 ? .alive : .dead
+            randomCells.append(Cell(state: randomState))
         }
         grid.cells = randomCells
         generationCount = 0
@@ -121,11 +123,13 @@ class GridController {
             return
         }
         
-        var newGrid = deadGrid()
-        let xOffset = (grid.width - stateInfo.width) / 2
-        let yOffset = (grid.height - stateInfo.height) / 2
-        let centeredCoordinates = stateInfo.aliveCellsCoordinates.map { Coordinate(x: $0.x + xOffset,
-                                                                                   y: $0.y + yOffset) }
+        var newGrid = Grid(width: width, height: height)
+        let dx = (width - stateInfo.width) / 2
+        let dy = (height - stateInfo.height) / 2
+        
+        let centeredCoordinates = stateInfo.aliveCellsCoordinates
+            .map { Coordinate(x: $0.x + dx, y: $0.y + dy) }
+        
         for coordinate in centeredCoordinates {
             newGrid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
         }
@@ -133,37 +137,25 @@ class GridController {
         grid = newGrid
     }
     
-    private func deadGrid() -> Grid {
-        var deadCells = [Cell]()
-        
-        for y in 0..<grid.height {
-            for x in 0..<grid.width {
-                deadCells.append(Cell(x: x, y: y, state: .dead))
-            }
-        }
-        
-        return Grid(width: grid.width, height: grid.height, cells: deadCells)
-    }
-    
     func resetGrid() {
-        grid = deadGrid()
+        grid = Grid(width: width, height: height)
         generationCount = 0
     }
     
-    func updateGridSize(to gridSize: Int) {
+    func updateGridSize(to newSize: Int) {
         let currentGrid = grid
-        let xOffset = (gridSize - currentGrid.width) / 2
-        let yOffset = (gridSize - currentGrid.height) / 2
+        let dx = (newSize - currentGrid.width) / 2
+        let dy = (newSize - currentGrid.height) / 2
+        
         var newCells = [Cell]()
         
-        for y in 0..<gridSize {
-            for x in 0..<gridSize {
-                let cellState = currentGrid.cellAt(x: x - xOffset, y: y - yOffset)?.state ?? .dead
-                let cell = Cell(x: x, y: y, state: cellState)
-                newCells.append(cell)
+        for y in 0..<newSize {
+            for x in 0..<newSize {
+                let cellState = currentGrid.cellAt(x: x - dx, y: y - dy)?.state ?? .dead
+                newCells.append(Cell(state: cellState))
             }
         }
         
-        grid = Grid(width: gridSize, height: gridSize, cells: newCells)
+        grid = Grid(width: newSize, height: newSize, cells: newCells)
     }
 }
