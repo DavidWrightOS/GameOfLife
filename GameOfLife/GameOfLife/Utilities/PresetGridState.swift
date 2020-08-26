@@ -14,12 +14,13 @@ struct Coordinate: Equatable {
 }
 
 enum InitialState: Int {
-    case random, acorn, pulsar, pentadecathlon, exploder
+    case random, acorn, pulsar, gliderGun, pentadecathlon, exploder
     
     var info: PresetGridState? {
         switch self {
         case .acorn: return .acorn
         case .pulsar: return .pulsar
+        case .gliderGun: return .gliderGun
         case .pentadecathlon: return .pentadecathlon
         case .exploder: return .exploder
         default: return nil
@@ -28,21 +29,24 @@ enum InitialState: Int {
 }
 
 struct PresetGridState {
+    let displayName: String
     let width: Int
     let height: Int
     let aliveCellsCoordinates: [Coordinate]
     
     static let acorn =
-    PresetGridState(width: 7,
-                    height: 3,
-                    aliveCellsCoordinates: [
-                        (0, 0), (1, 0), (4, 0), (5, 0), (6, 0),
-                        (3, 1),
-                        (1, 2),
-                        ].map { Coordinate(x: $0.0, y: $0.1) })
+        PresetGridState(displayName: "Acorn",
+                        width: 7,
+                        height: 3,
+                        aliveCellsCoordinates: [
+                            (0, 0), (1, 0), (4, 0), (5, 0), (6, 0),
+                            (3, 1),
+                            (1, 2),
+                            ].map { Coordinate(x: $0.0, y: $0.1) })
     
     static let pulsar =
-        PresetGridState(width: 15,
+        PresetGridState(displayName: "Pulsar",
+                        width: 15,
                         height: 15,
                         aliveCellsCoordinates: [
                             (3, 1), (4, 1), (5, 1), (9, 1), (10, 1), (11, 1),
@@ -57,8 +61,25 @@ struct PresetGridState {
                             (3, 13), (4, 13), (5, 13), (9, 13), (10, 13), (11, 13),
                             ].map { Coordinate(x: $0.0, y: $0.1) })
     
+    static let gliderGun =
+        PresetGridState(displayName: "Glider Gun",
+                        width: 36,
+                        height: 9,
+                        aliveCellsCoordinates: [
+                            (24, 0),
+                            (22, 1), (24, 1),
+                            (12, 2), (13, 2), (20, 2), (21, 2), (34, 2), (35, 2),
+                            (11, 3), (15, 3), (20, 3), (21, 3), (34, 3), (35, 3),
+                            (0, 4), (1, 4), (10, 4), (16, 4), (20, 4), (21, 4),
+                            (0, 5), (1, 5), (10, 5), (14, 5), (16, 5), (17, 5), (22, 5), (24, 5),
+                            (10, 6), (16, 6), (24, 6),
+                            (11, 7), (15, 7),
+                            (12, 8), (13, 8),
+                            ].map { Coordinate(x: $0.0, y: $0.1) })
+    
     static let pentadecathlon =
-        PresetGridState(width: 16,
+        PresetGridState(displayName: "Penta-D",
+                        width: 16,
                         height: 9,
                         aliveCellsCoordinates: [
                             (5, 3), (10, 3),
@@ -67,7 +88,8 @@ struct PresetGridState {
                             ].map { Coordinate(x: $0.0, y: $0.1) })
     
     static let exploder =
-        PresetGridState(width: 15,
+        PresetGridState(displayName: "Exploder",
+                        width: 15,
                         height: 15,
                         aliveCellsCoordinates: [
                             (7, 6),
