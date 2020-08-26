@@ -14,12 +14,13 @@ struct Coordinate: Equatable {
 }
 
 enum InitialState: Int {
-    case random, pulsar, pentadecathlon, exploder
+    case random, acorn, pulsar, pentadecathlon, exploder
     
     var info: PresetGridState? {
         switch self {
-        case .pulsar: return PresetGridState.pulsar
-        case .pentadecathlon: return PresetGridState.pentadecathlon
+        case .acorn: return .acorn
+        case .pulsar: return .pulsar
+        case .pentadecathlon: return .pentadecathlon
         case .exploder: return .exploder
         default: return nil
         }
@@ -30,6 +31,15 @@ struct PresetGridState {
     let width: Int
     let height: Int
     let aliveCellsCoordinates: [Coordinate]
+    
+    static let acorn =
+    PresetGridState(width: 7,
+                    height: 3,
+                    aliveCellsCoordinates: [
+                        (0, 0), (1, 0), (4, 0), (5, 0), (6, 0),
+                        (3, 1),
+                        (1, 2),
+                        ].map { Coordinate(x: $0.0, y: $0.1) })
     
     static let pulsar =
         PresetGridState(width: 15,
