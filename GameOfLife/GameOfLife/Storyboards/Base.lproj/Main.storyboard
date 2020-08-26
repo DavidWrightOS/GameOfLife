@@ -51,13 +51,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generation: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOh-IL-jh6" userLabel="GenerationLabel">
-                                <rect key="frame" x="16" y="128" width="343" height="19"/>
-                                <fontDescription key="fontDescription" name="Courier-Oblique" family="Courier" pointSize="19"/>
+                                <rect key="frame" x="16" y="116" width="343" height="16"/>
+                                <fontDescription key="fontDescription" name="Courier-Oblique" family="Courier" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2N-zF-YYC" userLabel="GridView" customClass="GridView" customModule="GameOfLife" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="155" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="375"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="q2N-zF-YYC" secondAttribute="height" multiplier="1:1" id="bie-Tu-EsU"/>
@@ -116,16 +116,16 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="a3U-yS-KwN">
-                                <rect key="frame" x="17.666666666666657" y="546" width="340" height="40"/>
+                                <rect key="frame" x="12" y="529" width="351" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjy-KO-TEy">
-                                        <rect key="frame" x="0.0" y="0.0" width="76" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="78.666666666666671" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="wnH-0F-hMk"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
                                         <state key="normal" title="Random">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -139,11 +139,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8G-37-fNj">
-                                        <rect key="frame" x="88" y="0.0" width="76" height="40"/>
+                                        <rect key="frame" x="90.666666666666686" y="0.0" width="79" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Pulsar">
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                        <state key="normal" title="Acorn">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -156,11 +156,11 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coQ-pI-A1R">
-                                        <rect key="frame" x="176" y="0.0" width="76" height="40"/>
+                                        <rect key="frame" x="181.66666666666666" y="0.0" width="78.666666666666657" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Penta-D">
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                        <state key="normal" title="Pulsar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -172,12 +172,12 @@
                                             <action selector="presetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KkO-WC-lKO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1I-bq-Ocw">
-                                        <rect key="frame" x="264" y="0.0" width="76" height="40"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1I-bq-Ocw">
+                                        <rect key="frame" x="272.33333333333331" y="0.0" width="78.666666666666686" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
-                                        <inset key="contentEdgeInsets" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
-                                        <state key="normal" title="Exploder">
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                        <inset key="contentEdgeInsets" minX="4" minY="0.0" maxX="4" maxY="0.0"/>
+                                        <state key="normal" title="Glider Gun">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -192,7 +192,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="0Ry-zM-joZ" userLabel="StepperStackView">
-                                <rect key="frame" x="16" y="602" width="343" height="86"/>
+                                <rect key="frame" x="16" y="585" width="343" height="86"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="twH-kj-2wK" userLabel="SizeStackView">
                                         <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="86"/>
@@ -247,7 +247,7 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bOh-IL-jh6" secondAttribute="trailing" constant="16" id="03M-2T-vCE"/>
                             <constraint firstItem="yDF-UE-nUH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="2dq-4P-s6n"/>
-                            <constraint firstItem="bOh-IL-jh6" firstAttribute="top" secondItem="EiJ-6g-1hz" secondAttribute="bottom" constant="20" id="3El-tf-yPG"/>
+                            <constraint firstItem="bOh-IL-jh6" firstAttribute="top" secondItem="EiJ-6g-1hz" secondAttribute="bottom" constant="8" id="3El-tf-yPG"/>
                             <constraint firstItem="kNs-4u-nsb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="0Ry-zM-joZ" secondAttribute="bottom" constant="20" id="BPm-Hu-wco"/>
                             <constraint firstItem="0Ry-zM-joZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="D4O-E4-ZxC"/>
                             <constraint firstItem="kNs-4u-nsb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EBe-Gg-WtF"/>
@@ -260,11 +260,11 @@
                             <constraint firstItem="q2N-zF-YYC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XZ0-9H-89Y"/>
                             <constraint firstItem="q2N-zF-YYC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dV2-O6-wID"/>
                             <constraint firstItem="kNs-4u-nsb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dZV-52-TNg"/>
-                            <constraint firstItem="a3U-yS-KwN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="knw-lC-Kak"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a3U-yS-KwN" secondAttribute="trailing" constant="8" id="l6E-jx-EAn"/>
+                            <constraint firstItem="a3U-yS-KwN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="knw-lC-Kak"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a3U-yS-KwN" secondAttribute="trailing" constant="12" id="l6E-jx-EAn"/>
                             <constraint firstItem="0Ry-zM-joZ" firstAttribute="top" secondItem="a3U-yS-KwN" secondAttribute="bottom" constant="16" id="lqy-nM-oXp"/>
                             <constraint firstItem="a3U-yS-KwN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pVA-Fl-hdG"/>
-                            <constraint firstItem="a3U-yS-KwN" firstAttribute="top" secondItem="q2N-zF-YYC" secondAttribute="bottom" constant="16" id="rmK-JV-2LA"/>
+                            <constraint firstItem="a3U-yS-KwN" firstAttribute="top" secondItem="q2N-zF-YYC" secondAttribute="bottom" constant="14" id="rmK-JV-2LA"/>
                             <constraint firstItem="bOh-IL-jh6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="t1x-Oc-rHu"/>
                             <constraint firstItem="SMW-pu-vsv" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-12" id="vcU-lr-1Uw"/>
                         </constraints>
@@ -278,6 +278,10 @@
                         <outlet property="gridView" destination="q2N-zF-YYC" id="dGp-D4-dDN"/>
                         <outlet property="playPauseButton" destination="ta5-sM-jPW" id="bSR-Oc-Q3Z"/>
                         <outlet property="speedLabel" destination="7xa-dg-uZ3" id="fGB-P6-XeL"/>
+                        <outletCollection property="presetButtons" destination="bjy-KO-TEy" collectionClass="NSMutableArray" id="NgA-P5-WDL"/>
+                        <outletCollection property="presetButtons" destination="c8G-37-fNj" collectionClass="NSMutableArray" id="Bfk-YU-ZeR"/>
+                        <outletCollection property="presetButtons" destination="coQ-pI-A1R" collectionClass="NSMutableArray" id="6Vc-Iq-cmc"/>
+                        <outletCollection property="presetButtons" destination="Q1I-bq-Ocw" collectionClass="NSMutableArray" id="Ikg-5X-XfK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
