@@ -129,11 +129,16 @@
                                         <state key="normal" title="Random">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="preset1ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="riQ-tv-DnN"/>
+                                            <action selector="presetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eey-b4-zeo"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8G-37-fNj">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8G-37-fNj">
                                         <rect key="frame" x="88" y="0.0" width="76" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
@@ -141,11 +146,16 @@
                                         <state key="normal" title="Pulsar">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="preset2ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y9G-8e-cc5"/>
+                                            <action selector="presetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LiH-by-S46"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coQ-pI-A1R">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="coQ-pI-A1R">
                                         <rect key="frame" x="176" y="0.0" width="76" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
@@ -153,11 +163,16 @@
                                         <state key="normal" title="Penta-D">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="preset3ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OYO-TF-aBa"/>
+                                            <action selector="presetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KkO-WC-lKO"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1I-bq-Ocw">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1I-bq-Ocw">
                                         <rect key="frame" x="264" y="0.0" width="76" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
@@ -165,8 +180,13 @@
                                         <state key="normal" title="Exploder">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="4"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="preset4ButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="pZO-pP-oDI"/>
+                                            <action selector="presetButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LR1-pa-6RA"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -240,8 +260,8 @@
                             <constraint firstItem="q2N-zF-YYC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XZ0-9H-89Y"/>
                             <constraint firstItem="q2N-zF-YYC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dV2-O6-wID"/>
                             <constraint firstItem="kNs-4u-nsb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dZV-52-TNg"/>
-                            <constraint firstItem="a3U-yS-KwN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="knw-lC-Kak"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a3U-yS-KwN" secondAttribute="trailing" constant="16" id="l6E-jx-EAn"/>
+                            <constraint firstItem="a3U-yS-KwN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="knw-lC-Kak"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="a3U-yS-KwN" secondAttribute="trailing" constant="8" id="l6E-jx-EAn"/>
                             <constraint firstItem="0Ry-zM-joZ" firstAttribute="top" secondItem="a3U-yS-KwN" secondAttribute="bottom" constant="16" id="lqy-nM-oXp"/>
                             <constraint firstItem="a3U-yS-KwN" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="pVA-Fl-hdG"/>
                             <constraint firstItem="a3U-yS-KwN" firstAttribute="top" secondItem="q2N-zF-YYC" secondAttribute="bottom" constant="16" id="rmK-JV-2LA"/>
