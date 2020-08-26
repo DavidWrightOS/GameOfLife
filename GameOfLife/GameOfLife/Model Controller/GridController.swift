@@ -71,28 +71,19 @@ class GridController {
         let currentGenerationCells = grid.cells
         var nextGenerationCells = currentGenerationCells
         
-        // Rules for determining the next generation:
-        // 1. Any live cell with fewer than two live neighbors will die.
-        // 2. Any live cell with two or three live neighbors will live on to the next generation.
-        // 3. Any live cell with more than three live neighbors will die.
-        // 4. Any dead cell with exactly three live neighbors will become a live cell.
-        
-            for (index, currentCell) in currentGenerationCells.enumerated() {
-                switch self.numberOfAliveNeighborsForCell(at: index) {
-                    
-                // Rule 2
-                case 2...3 where currentCell.state == .alive:
-                    break
-                    
-                // Rule 4
-                case 3 where currentCell.state == .dead:
-                    nextGenerationCells[index].state = .alive
-                    
-                // Rules 1 & 3
-                default:
-                    nextGenerationCells[index].state = .dead
-                }
+        for (index, currentCell) in currentGenerationCells.enumerated() {
+            switch self.numberOfAliveNeighborsForCell(at: index) {
+            case 2...3 where currentCell.state == .alive:
+                // Rule 2: Any live cell with two or three live neighbors will live on to the next generation.
+                break
+            case 3 where currentCell.state == .dead:
+                // Rule 4: Any dead cell with exactly three live neighbors will become a live cell.
+                nextGenerationCells[index].state = .alive
+            default:
+                // Rules 1 & 3: Any live cell with fewer than two or more than three live neighbors will die.
+                nextGenerationCells[index].state = .dead
             }
+        }
         
         self.nextGenerationGridBuffer = Grid(width: width, height: height, cells: nextGenerationCells)
     }
@@ -107,15 +98,6 @@ class GridController {
         }
         grid.cells = randomCells
         generationCount = 0
-    }
-    
-    func setInitialState(stateIndex: Int) {
-        guard let initialState = InitialState(rawValue: stateIndex) else {
-            setRandomInitialState()
-            return
-        }
-        
-        setInitialState(initialState)
     }
     
     func setInitialState(_ initialState: InitialState) {
@@ -136,6 +118,7 @@ class GridController {
         }
         
         grid = newGrid
+        generationCount = 0
     }
     
     func resetGrid() {
