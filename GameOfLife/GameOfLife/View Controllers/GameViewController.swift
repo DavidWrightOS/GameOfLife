@@ -17,7 +17,7 @@ class GameViewController: UIViewController {
     var gridSize = 25
     var isRunning = false
     var timer: Timer?
-    var presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
+    let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
     
     // MARK: - IBOutlets
     
@@ -27,6 +27,8 @@ class GameViewController: UIViewController {
     @IBOutlet var speedLabel: UILabel!
     @IBOutlet var gridSizeLabel: UILabel!
     @IBOutlet var presetButtons: [UIButton]!
+    @IBOutlet var gameSpeedStepper: UIStepper!
+    @IBOutlet var gridSizeStepper: UIStepper!
     
     // MARK: - Lifecycle
     
@@ -34,7 +36,9 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         gridController.setInitialState(.random)
         updatePresetButtonTitles()
+        gameSpeedStepper.value = gameSpeed
         updateGameSpeed()
+        gridSizeStepper.value = Double(gridSize)
         updateGridSize()
         gridView.grid = gridController.grid
     }
