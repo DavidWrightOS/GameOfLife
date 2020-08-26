@@ -75,3 +75,15 @@ extension Grid: CustomStringConvertible {
         return description + "\n"
     }
 }
+
+extension Grid: Equatable {
+    static func == (lhs: Grid, rhs: Grid) -> Bool {
+        guard lhs.width == rhs.width, lhs.height == rhs.height else { return false }
+        
+        for i in lhs.cells.indices {
+            guard lhs.cells[i].state == rhs.cells[i].state else { return false }
+        }
+        
+        return true
+    }
+}
