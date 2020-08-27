@@ -40,6 +40,7 @@ class GameViewController: UIViewController {
         updateGameSpeed()
         gridSizeStepper.value = Double(gridSize)
         updateGridSize()
+        gridController.setInitialState(.random)
         gridView.grid = gridController.grid
     }
     
