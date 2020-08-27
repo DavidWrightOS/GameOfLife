@@ -71,21 +71,25 @@ class GridController {
         let currentGenerationCells = grid.cells
         var nextGenerationCells = currentGenerationCells
         
-        for (index, currentCell) in currentGenerationCells.enumerated() {
-            switch self.numberOfAliveNeighborsForCell(at: index) {
-            case 2...3 where currentCell.state == .alive:
-                // Rule 2: Any live cell with two or three live neighbors will live on to the next generation.
-                break
-            case 3 where currentCell.state == .dead:
-                // Rule 4: Any dead cell with exactly three live neighbors will become a live cell.
-                nextGenerationCells[index].state = .alive
-            default:
-                // Rules 1 & 3: Any live cell with fewer than two or more than three live neighbors will die.
-                nextGenerationCells[index].state = .dead
+        DispatchQueue.global(qos: .userInteractive).async {
+            for (index, currentCell) in currentGenerationCells.enumerated() {
+                switch self.numberOfAliveNeighborsForCell(at: index) {
+                case 2...3 where currentCell.state == .alive:
+                    // Rule 2: Any live cell with two or three live neighbors will live on to the next generation.
+                    break
+                case 3 where currentCell.state == .dead:
+                    // Rule 4: Any dead cell with exactly three live neighbors will become a live cell.
+                    nextGenerationCells[index].state = .alive
+                default:
+                    // Rules 1 & 3: Any live cell with fewer than two or more than three live neighbors will die.
+                    nextGenerationCells[index].state = .dead
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.nextGenerationGridBuffer = Grid(width: self.width, height: self.height, cells: nextGenerationCells)
             }
         }
-        
-        self.nextGenerationGridBuffer = Grid(width: width, height: height, cells: nextGenerationCells)
     }
     
     func setRandomInitialState() {
