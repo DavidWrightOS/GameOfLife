@@ -50,17 +50,17 @@ class GridController {
     
     func neighborsForCell(at index: Int) -> [Cell] {
         let cellCoordinate = grid.coordinateForCell(at: index)
-        var neighbors = [Cell?]()
+        var neighbors = [Cell]()
         
         for dy in -1...1 {
             for dx in -1...1 {
                 guard !(dx == 0 && dy == 0) else { continue }
-                let neighbor = grid.cellAt(x: cellCoordinate.x + dx, y: cellCoordinate.y + dy)
+                guard let neighbor = grid.cellAt(x: cellCoordinate.x + dx, y: cellCoordinate.y + dy) else { continue }
                 neighbors.append(neighbor)
             }
         }
         
-        return neighbors.compactMap { $0 }
+        return neighbors
     }
     
     func numberOfAliveNeighborsForCell(at index: Int) -> Int {

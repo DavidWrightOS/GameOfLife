@@ -177,6 +177,9 @@ class GameViewController: UIViewController {
     }
 }
 
+
+// MARK: - InfoViewControllerDelegate
+
 extension GameViewController: InfoViewControllerDelegate {
     func didDismissInfoViewController() {
         if isRunning {
