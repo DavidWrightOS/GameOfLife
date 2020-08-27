@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Grid {
+class Grid {
     
     // MARK: - Properties
     
@@ -40,9 +40,8 @@ struct Grid {
     }
     
     @discardableResult
-    mutating func toggleStateForCellAt(x: Int, y: Int) -> Bool {
-        guard x >= 0, x < width,
-        y >= 0, y < height else { return false }
+    func toggleStateForCellAt(x: Int, y: Int) -> Bool {
+        guard x >= 0, x < width, y >= 0, y < height else { return false }
         let index = y * width + x
         if cells[index].state == .alive {
             cells[index].state = .dead
@@ -53,7 +52,7 @@ struct Grid {
     }
     
     @discardableResult
-    mutating func setStateForCellAt(x: Int, y: Int, state: State) -> Bool {
+    func setStateForCellAt(x: Int, y: Int, state: State) -> Bool {
         guard x >= 0, x < width,
         y >= 0, y < height else { return false }
         let index = y * width + x
