@@ -219,7 +219,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minimumValue="25" maximumValue="125" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="kbM-2V-E1E">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="25" minimumValue="25" maximumValue="225" stepValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="kbM-2V-E1E">
                                                 <rect key="frame" x="36.666666666666657" y="50" width="94" height="32"/>
                                                 <connections>
                                                     <action selector="gridSizeStepperValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="YMQ-Bm-1Pq"/>
@@ -242,7 +242,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="6l1-pb-784">
+                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="6l1-pb-784">
                                                 <rect key="frame" x="36.666666666666686" y="50" width="94" height="32"/>
                                                 <connections>
                                                     <action selector="gameSpeedStepperValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="aPd-Wo-IKZ"/>
