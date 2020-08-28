@@ -197,6 +197,7 @@ class GameViewController: UIViewController {
     @IBAction func presetButtonTapped(_ sender: UIButton) {
         stopTimer()
         gridController.setInitialState(presetStates[sender.tag])
+        gameIsInInitialState = true
         updateViews()
     }
 }
