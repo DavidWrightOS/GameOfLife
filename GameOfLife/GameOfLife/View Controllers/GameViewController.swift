@@ -98,6 +98,12 @@ class GameViewController: UIViewController {
             updateViews()
             
             tempGenCounter += 1
+        } else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) {
+                if !self.gameIsInInitialState {
+                    self.advanceOneGeneration()
+                }
+            }
         }
     }
     
