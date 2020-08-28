@@ -30,6 +30,20 @@ struct Grid {
         return x >= 0 && x < width && y >= 0 && y < height
     }
     
+    // Uncomment the following code to enable subscript access, Ex: grid[1][3]
+    /*
+    subscript(row: Int, column: Int) -> Cell {
+        get {
+            assert(indexIsValidAt(x: column, y: row), "Index out of range")
+            return cells[(row * column) + column]
+        }
+        set {
+            assert(indexIsValidAt(x: column, y: row), "Index out of range")
+            cells[(row * column) + column] = newValue
+        }
+    }
+    */
+    
     func cellAt(x: Int, y: Int) -> Cell? {
         guard indexIsValidAt(x: x, y: y) else { return nil }
         return cells[y * width + x]

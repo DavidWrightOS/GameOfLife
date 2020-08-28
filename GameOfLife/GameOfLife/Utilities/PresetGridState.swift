@@ -16,6 +16,10 @@ struct Coordinate: Equatable {
 enum InitialState: Int {
     case random, acorn, pulsar, gliderGun, pentadecathlon, exploder
     
+    static subscript(n: Int) -> InitialState {
+        InitialState(rawValue: n)!
+    }
+    
     var info: PresetGridState? {
         switch self {
         case .acorn: return .acorn
