@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
 
     var gridController = GridController(width: 25, height: 25)
     var gameSpeed = 10.0
-    var gridSize = 25
+    var gridSize = 45
     var isRunning = false
     var timer: Timer?
     let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
@@ -72,8 +72,14 @@ class GameViewController: UIViewController {
     }
     
     func advanceOneGeneration() {
-        gridController.loadNextGeneration()
-        updateViews()
+        if !gridController.isCalculatingNextGeneration {
+            // Main thread: swap the grid and buffer properties
+            // Background thread: calculate next generation and store in buffer
+            gridController.loadNextGeneration()
+            
+            // Main thread: update the screen with the current grid
+            updateViews()
+        }
     }
     
     // Touch Gestures

@@ -19,6 +19,7 @@ class GridController {
     }
     
     var nextGenerationGridBuffer: Grid!
+    var isCalculatingNextGeneration = true
     var generationCount = 0
     var width: Int { grid.width }
     var height: Int { grid.height }
@@ -68,6 +69,8 @@ class GridController {
     }
     
     func updateNextGenerationGridBuffer() {
+        isCalculatingNextGeneration = true
+        
         let currentGenerationCells = grid.cells
         var nextGenerationCells = currentGenerationCells
         
@@ -86,9 +89,8 @@ class GridController {
                 }
             }
             
-            DispatchQueue.main.async {
-                self.nextGenerationGridBuffer = Grid(width: self.width, height: self.height, cells: nextGenerationCells)
-            }
+            self.nextGenerationGridBuffer = Grid(width: self.width, height: self.height, cells: nextGenerationCells)
+            self.isCalculatingNextGeneration = false
         }
     }
     
