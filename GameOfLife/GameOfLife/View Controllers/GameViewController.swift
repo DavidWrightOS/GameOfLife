@@ -19,6 +19,13 @@ class GameViewController: UIViewController {
     var timer: Timer?
     let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
     
+    var gameIsInInitialState = true {
+        didSet {
+            gridSizeStepper.isEnabled = gameIsInInitialState
+            gridSizeLabel.textColor = gameIsInInitialState ? .label : .systemGray
+        }
+    }
+    
     var tempGenCounter = 0 {
         didSet {
             if tempGenCounter >= Int(gameSpeed) * 5 {
@@ -97,7 +104,7 @@ class GameViewController: UIViewController {
     // Touch Gestures
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard gridController.generationCount == 0 else { return }
+        guard gameIsInInitialState else { return }
         guard let point = touches.first?.location(in: gridView),
             gridView.bounds.contains(point) else { return }
         
@@ -109,7 +116,7 @@ class GameViewController: UIViewController {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard gridController.generationCount == 0 else { return }
+        guard gameIsInInitialState else { return }
         guard let point = touches.first?.location(in: gridView),
             gridView.bounds.contains(point) else { return }
         
@@ -158,6 +165,7 @@ class GameViewController: UIViewController {
         isRunning.toggle()
         playPauseButton.isSelected = isRunning
         if isRunning {
+            gameIsInInitialState = false
             advanceOneGeneration()
             startTimer()
         } else {
@@ -172,6 +180,7 @@ class GameViewController: UIViewController {
     @IBAction func stopButtonTapped(_ sender: UIButton) {
         stopTimer()
         gridController.resetGrid()
+        gameIsInInitialState = true
         updateViews()
     }
     

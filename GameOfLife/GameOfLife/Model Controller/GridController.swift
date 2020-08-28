@@ -24,7 +24,7 @@ class GridController {
     var width: Int { grid.width }
     var height: Int { grid.height }
     var cellCount: Int { width * height }
-    var lastInitialState: InitialState = .random
+    var initialState: InitialState?
     
     var secondsToCalculateNextGeneration = [Double]() {
         didSet {
@@ -118,15 +118,10 @@ class GridController {
             randomCells.append(Cell(state: randomState()))
         }
         grid.cells = randomCells
-        generationCount = 0
-        lastInitialState = .random
     }
     
-    func setInitialState(_ initialState: InitialState) {
-        guard let stateInfo = initialState.info else {
-            setRandomInitialState()
-            return
-        }
+    func newGridWithCurrentInitialState(width: Int, height: Int) -> Grid? {
+        guard let stateInfo = initialState?.info else { return nil }
         
         var newGrid = Grid(width: width, height: height)
         let dx = (width - stateInfo.width) / 2
@@ -139,32 +134,53 @@ class GridController {
             newGrid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
         }
         
-        grid = newGrid
+        return newGrid
+    }
+    
+    func setInitialState(_ initialState: InitialState) {
+        self.initialState = initialState
         generationCount = 0
-        lastInitialState = initialState
+        
+        guard let newGrid = newGridWithCurrentInitialState(width: width, height: height) else {
+            setRandomInitialState()
+            return
+        }
+        
+        grid = newGrid
     }
     
     func resetGrid() {
         grid = Grid(width: width, height: height)
         generationCount = 0
+        initialState = nil
     }
     
     func updateGridSize(to newSize: Int) {
-        let currentGrid = grid
-        let dx = (newSize - currentGrid.width) / 2
-        let dy = (newSize - currentGrid.height) / 2
+        guard generationCount == 0 else { return }
         
-        var newCells = [Cell]()
-        newCells.reserveCapacity(newSize * newSize)
+        if let initialStateWidth = self.initialState?.info?.width,
+            let initialStateHeight = self.initialState?.info?.height,
+            width < initialStateWidth || height < initialStateHeight,
+            let newGrid = newGridWithCurrentInitialState(width: newSize, height: newSize) {
+            self.grid = newGrid
+            return
+        }
+        
+        let dx = (newSize - width) / 2
+        let dy = (newSize - height) / 2
+        
+        var newGrid = Grid(width: newSize, height: newSize)
         
         for y in 0..<newSize {
             for x in 0..<newSize {
-                let cellState = currentGrid.cellAt(x: x - dx, y: y - dy)?.state ?? expandedGridNewCellState()
-                newCells.append(Cell(state: cellState))
+                let cellState = grid.cellAt(x: x - dx, y: y - dy)?.state ?? expandedGridNewCellState()
+                if cellState == .alive {
+                    newGrid.setStateForCellAt(x: x, y: y, state: .alive)
+                }
             }
         }
         
-        grid = Grid(width: newSize, height: newSize, cells: newCells)
+        grid = newGrid
     }
     
     func randomState() -> State {
@@ -172,6 +188,6 @@ class GridController {
     }
     
     func expandedGridNewCellState() -> State {
-        lastInitialState == .random ? randomState() : .dead
+        initialState == .random ? randomState() : .dead
     }
 }
