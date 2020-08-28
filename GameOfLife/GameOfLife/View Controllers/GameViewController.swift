@@ -19,6 +19,17 @@ class GameViewController: UIViewController {
     var timer: Timer?
     let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
     
+    var tempGenCounter = 0 {
+        didSet {
+            if tempGenCounter >= Int(gameSpeed) * 5 {
+                tempGenCounter = 0
+                print(String(format: "Drawing: %.4f seconds", gridView.averageSecondsToDraw))
+                print(String(format: "Loading: %.4f seconds", gridController.averageSecondsToCalculateNextGeneration))
+                print()
+            }
+        }
+    }
+    
     // MARK: - IBOutlets
     
     @IBOutlet var gridView: GridView!
@@ -79,6 +90,8 @@ class GameViewController: UIViewController {
             
             // Main thread: update the screen with the current grid
             updateViews()
+            
+            tempGenCounter += 1
         }
     }
     
