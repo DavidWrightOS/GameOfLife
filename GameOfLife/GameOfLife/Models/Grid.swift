@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Grid {
+struct Grid {
     
     // MARK: - Properties
     
@@ -26,10 +26,12 @@ class Grid {
     
     // MARK: - Methods
     
+    func indexIsValidAt(x: Int, y: Int) -> Bool {
+        return x >= 0 && x < width && y >= 0 && y < height
+    }
+    
     func cellAt(x: Int, y: Int) -> Cell? {
-        guard x >= 0, x < width,
-            y >= 0, y < height else { return nil }
-        
+        guard indexIsValidAt(x: x, y: y) else { return nil }
         return cells[y * width + x]
     }
     
@@ -40,21 +42,16 @@ class Grid {
     }
     
     @discardableResult
-    func toggleStateForCellAt(x: Int, y: Int) -> Bool {
-        guard x >= 0, x < width, y >= 0, y < height else { return false }
+    mutating func toggleStateForCellAt(x: Int, y: Int) -> Bool {
+        guard indexIsValidAt(x: x, y: y) else { return false }
         let index = y * width + x
-        if cells[index].state == .alive {
-            cells[index].state = .dead
-        } else {
-            cells[index].state = .alive
-        }
+        cells[index].state = (cells[index].state == .alive) ? .dead : .alive
         return true
     }
     
     @discardableResult
-    func setStateForCellAt(x: Int, y: Int, state: State) -> Bool {
-        guard x >= 0, x < width,
-        y >= 0, y < height else { return false }
+    mutating func setStateForCellAt(x: Int, y: Int, state: State) -> Bool {
+        guard indexIsValidAt(x: x, y: y) else { return false }
         let index = y * width + x
         cells[index].state = state
         return true
