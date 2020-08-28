@@ -26,19 +26,6 @@ class GridController {
     var cellCount: Int { width * height }
     var initialState: InitialState?
     
-    var secondsToCalculateNextGeneration = [Double]() {
-        didSet {
-            if secondsToCalculateNextGeneration.count > 10 {
-                secondsToCalculateNextGeneration.removeFirst()
-            }
-        }
-    }
-    
-    var averageSecondsToCalculateNextGeneration: Double {
-        guard !secondsToCalculateNextGeneration.isEmpty else { return 0 }
-        return secondsToCalculateNextGeneration.reduce(0,+) / Double(secondsToCalculateNextGeneration.count)
-    }
-    
     // MARK: - Initializers
     
     init(grid: Grid? = nil) {
@@ -84,7 +71,6 @@ class GridController {
     
     func updateNextGenerationGridBuffer() {
         isCalculatingNextGeneration = true
-        let start = Date()
         
         let currentGenerationCells = grid.cells
         var nextGenerationCells = currentGenerationCells
@@ -106,7 +92,6 @@ class GridController {
             
             self.nextGenerationGridBuffer = Grid(width: self.width, height: self.height, cells: nextGenerationCells)
             self.isCalculatingNextGeneration = false
-            self.secondsToCalculateNextGeneration.append(Date().timeIntervalSince(start))
         }
     }
     

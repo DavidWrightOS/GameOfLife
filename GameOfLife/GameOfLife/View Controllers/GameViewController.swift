@@ -26,16 +26,6 @@ class GameViewController: UIViewController {
         }
     }
     
-    var tempGenCounter = 0 {
-        didSet {
-            if tempGenCounter >= Int(gameSpeed) * 5 {
-                tempGenCounter = 0
-                print(String(format: "Drawing: %.4f seconds", gridView.averageSecondsToDraw))
-                print(String(format: "Loading: %.4f seconds\n", gridController.averageSecondsToCalculateNextGeneration))
-            }
-        }
-    }
-    
     // MARK: - IBOutlets
     
     @IBOutlet var gridView: GridView!
@@ -90,6 +80,7 @@ class GameViewController: UIViewController {
     
     func advanceOneGeneration() {
         if !gridController.isCalculatingNextGeneration {
+            
             // Main thread: swap the grid and buffer properties
             // Background thread: calculate next generation and store in buffer
             gridController.loadNextGeneration()
@@ -97,7 +88,6 @@ class GameViewController: UIViewController {
             // Main thread: update the screen with the current grid
             updateViews()
             
-            tempGenCounter += 1
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.03) {
                 if !self.gameIsInInitialState {

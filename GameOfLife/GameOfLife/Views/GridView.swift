@@ -22,19 +22,6 @@ class GridView: UIView {
         guard let grid = grid else { return 0 }
         return frame.width / CGFloat(grid.width)
     }
-        
-    var secondsToDraw = [Double]() {
-        didSet {
-            if secondsToDraw.count > 10 {
-                secondsToDraw.removeFirst()
-            }
-        }
-    }
-    
-    var averageSecondsToDraw: Double {
-        guard !secondsToDraw.isEmpty else { return 0 }
-        return secondsToDraw.reduce(0,+) / Double(secondsToDraw.count)
-    }
     
     // MARK: - Initializers
     
@@ -50,7 +37,6 @@ class GridView: UIView {
     
     public override func draw(_ rect: CGRect) {
         guard let grid = grid else { return }
-        let start = Date()
         let context = UIGraphicsGetCurrentContext()
         
         context?.saveGState()
@@ -69,6 +55,5 @@ class GridView: UIView {
         }
         
         context?.restoreGState()
-        secondsToDraw.append(Date().timeIntervalSince(start))
     }
 }
