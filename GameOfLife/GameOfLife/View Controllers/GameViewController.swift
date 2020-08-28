@@ -24,8 +24,7 @@ class GameViewController: UIViewController {
             if tempGenCounter >= Int(gameSpeed) * 5 {
                 tempGenCounter = 0
                 print(String(format: "Drawing: %.4f seconds", gridView.averageSecondsToDraw))
-                print(String(format: "Loading: %.4f seconds", gridController.averageSecondsToCalculateNextGeneration))
-                print()
+                print(String(format: "Loading: %.4f seconds\n", gridController.averageSecondsToCalculateNextGeneration))
             }
         }
     }

@@ -24,6 +24,7 @@ class GridController {
     var width: Int { grid.width }
     var height: Int { grid.height }
     var cellCount: Int { width * height }
+    var lastInitialState: InitialState = .random
     
     var secondsToCalculateNextGeneration = [Double]() {
         didSet {
@@ -114,11 +115,11 @@ class GridController {
         randomCells.reserveCapacity(cellCount)
         
         for _ in 0..<cellCount {
-            let randomState: State = Int.random(in: 0...5) == 0 ? .alive : .dead
-            randomCells.append(Cell(state: randomState))
+            randomCells.append(Cell(state: randomState()))
         }
         grid.cells = randomCells
         generationCount = 0
+        lastInitialState = .random
     }
     
     func setInitialState(_ initialState: InitialState) {
@@ -140,6 +141,7 @@ class GridController {
         
         grid = newGrid
         generationCount = 0
+        lastInitialState = initialState
     }
     
     func resetGrid() {
@@ -157,11 +159,19 @@ class GridController {
         
         for y in 0..<newSize {
             for x in 0..<newSize {
-                let cellState = currentGrid.cellAt(x: x - dx, y: y - dy)?.state ?? .dead
+                let cellState = currentGrid.cellAt(x: x - dx, y: y - dy)?.state ?? expandedGridNewCellState()
                 newCells.append(Cell(state: cellState))
             }
         }
         
         grid = Grid(width: newSize, height: newSize, cells: newCells)
+    }
+    
+    func randomState() -> State {
+        Int.random(in: 0...5) == 0 ? .alive : .dead
+    }
+    
+    func expandedGridNewCellState() -> State {
+        lastInitialState == .random ? randomState() : .dead
     }
 }
