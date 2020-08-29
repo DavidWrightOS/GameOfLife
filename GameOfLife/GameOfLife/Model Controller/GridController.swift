@@ -36,6 +36,19 @@ class GridController {
     var initialState: InitialState?
     var initialGrid: Grid
     var delegate: GridControllerDelegate?
+
+    var gridHasOnlyDeadCells: Bool {
+        // Start checking from the middle of the grid first because it is more likely to contain live cells
+        let middleIndex = cellCount / 2
+        for offset in 0..<middleIndex - 1 {
+            guard grid.cells[middleIndex - offset].state == .dead else { return false }
+            guard grid.cells[middleIndex + offset].state == .dead else { return false }
+        }
+        guard grid.cells.first?.state == .dead,
+            grid.cells.last?.state == .dead else { return false }
+        
+        return true
+    }
     
     // MARK: - Initializers
     

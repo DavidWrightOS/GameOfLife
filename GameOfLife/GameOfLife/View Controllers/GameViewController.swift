@@ -20,10 +20,25 @@ class GameViewController: UIViewController {
     var timer: Timer?
     let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
     
+    let enabledButtonColor = UIColor.systemBlue
+    let disabledButtonColor = UIColor.systemBlue.withAlphaComponent(0.25)
+    
     var gameIsInInitialState = true {
         didSet {
             gridSizeStepper.isEnabled = gameIsInInitialState
-            gridSizeLabel.textColor = gameIsInInitialState ? .label : .systemGray
+            gridSizeLabel.textColor = gameIsInInitialState ? .label : .darkGray
+            gridSizeHeaderLabel.textColor = gameIsInInitialState ? .systemGray : .darkGray
+            stopButton.isEnabled = !gameIsInInitialState
+            stopButton.tintColor = gameIsInInitialState ? disabledButtonColor : enabledButtonColor
+        }
+    }
+    
+    var gridIsEmpty = false {
+        didSet {
+            clearGridButton.isHidden = gridIsEmpty
+            advance1StepButton.isEnabled = !gridIsEmpty
+            playPauseButton.isEnabled = !gridIsEmpty
+            playPauseButton.tintColor = gridIsEmpty ? disabledButtonColor : enabledButtonColor
         }
     }
     
@@ -32,16 +47,22 @@ class GameViewController: UIViewController {
     @IBOutlet var gridView: GridView!
     @IBOutlet var generationCountLabel: UILabel!
     @IBOutlet var playPauseButton: UIButton!
+    @IBOutlet var advance1StepButton: UIButton!
+    @IBOutlet var stopButton: UIButton!
     @IBOutlet var speedLabel: UILabel!
+    @IBOutlet var gridSizeHeaderLabel: UILabel!
     @IBOutlet var gridSizeLabel: UILabel!
     @IBOutlet var presetButtons: [UIButton]!
     @IBOutlet var gameSpeedStepper: UIStepper!
     @IBOutlet var gridSizeStepper: UIStepper!
+    @IBOutlet var clearGridButton: UIButton!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        advance1StepButton.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.15), for: .disabled)
+        stopButton.isEnabled = false
         gridController.setInitialState(.random)
         updatePresetButtonTitles()
         gameSpeedStepper.value = gameSpeed
@@ -117,6 +138,11 @@ class GameViewController: UIViewController {
         gridView.grid?.setStateForCellAt(x: x, y: y, state: .alive)
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard gameIsInInitialState else { return }
+        gridIsEmpty = gridController.gridHasOnlyDeadCells
+    }
+    
     // MARK: - Timer
     
     func startTimer() {
@@ -183,8 +209,12 @@ class GameViewController: UIViewController {
     // Steppers
     
     @IBAction func gridSizeStepperValueChanged(_ sender: UIStepper) {
+        let oldGridSize = gridSize
         gridSize = Int(sender.value)
         updateGridSize()
+        if gridSize < oldGridSize {
+            gridIsEmpty = gridController.gridHasOnlyDeadCells
+        }
     }
     
     @IBAction func gameSpeedStepperValueChanged(_ sender: UIStepper) {
@@ -198,6 +228,7 @@ class GameViewController: UIViewController {
         stopTimer()
         gridController.setInitialState(presetStates[sender.tag])
         gameIsInInitialState = true
+        gridIsEmpty = false
         updateViews()
     }
 }
