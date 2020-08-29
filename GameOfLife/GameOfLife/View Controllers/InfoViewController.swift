@@ -12,7 +12,7 @@ protocol InfoViewControllerDelegate: class {
     func didDismissInfoViewController()
 }
 
-class InfoViewController: UIViewController, UIAdaptivePresentationControllerDelegate {
+class InfoViewController: UIViewController {
     
     weak var delegate: InfoViewControllerDelegate?
     
