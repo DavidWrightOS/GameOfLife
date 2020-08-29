@@ -19,6 +19,7 @@
 		63668C1D24EBBE0200084403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63668C1C24EBBE0200084403 /* Assets.xcassets */; };
 		63668C2024EBBE0200084403 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63668C1E24EBBE0200084403 /* LaunchScreen.storyboard */; };
 		6387964224F60BA6005C6BC4 /* PresetGridState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387964124F60BA6005C6BC4 /* PresetGridState.swift */; };
+		638A8C9624FB0E5D000EFC57 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A8C9524FB0E5D000EFC57 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		63668C1F24EBBE0200084403 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63668C2124EBBE0200084403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6387964124F60BA6005C6BC4 /* PresetGridState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetGridState.swift; sourceTree = "<group>"; };
+		638A8C9524FB0E5D000EFC57 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				6387964124F60BA6005C6BC4 /* PresetGridState.swift */,
+				638A8C9524FB0E5D000EFC57 /* Colors.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63668C1424EBBE0000084403 /* AppDelegate.swift in Sources */,
+				638A8C9624FB0E5D000EFC57 /* Colors.swift in Sources */,
 				6387964224F60BA6005C6BC4 /* PresetGridState.swift in Sources */,
 				631E785424EE23F6006B1155 /* GridController.swift in Sources */,
 				631E784824ED0C94006B1155 /* GameViewController.swift in Sources */,

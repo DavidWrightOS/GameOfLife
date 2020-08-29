@@ -20,16 +20,13 @@ class GameViewController: UIViewController {
     var timer: Timer?
     let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
     
-    let enabledButtonColor = UIColor.systemBlue
-    let disabledButtonColor = UIColor.systemBlue.withAlphaComponent(0.25)
-    
     var gameIsInInitialState = true {
         didSet {
             gridSizeStepper.isEnabled = gameIsInInitialState
             gridSizeLabel.textColor = gameIsInInitialState ? .label : .darkGray
             gridSizeHeaderLabel.textColor = gameIsInInitialState ? .systemGray : .darkGray
             stopButton.isEnabled = !gameIsInInitialState
-            stopButton.tintColor = gameIsInInitialState ? disabledButtonColor : enabledButtonColor
+            stopButton.tintColor = gameIsInInitialState ? .disabledButtonColor : .enabledButtonColor
         }
     }
     
@@ -38,7 +35,7 @@ class GameViewController: UIViewController {
             clearGridButton.isHidden = gridIsEmpty
             advance1StepButton.isEnabled = !gridIsEmpty
             playPauseButton.isEnabled = !gridIsEmpty
-            playPauseButton.tintColor = gridIsEmpty ? disabledButtonColor : enabledButtonColor
+            playPauseButton.tintColor = gridIsEmpty ? .disabledButtonColor : .enabledButtonColor
         }
     }
     
@@ -253,4 +250,3 @@ extension GameViewController: GridControllerDelegate {
         }
     }
 }
-
