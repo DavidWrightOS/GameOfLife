@@ -169,8 +169,14 @@ class GameViewController: UIViewController {
     
     @IBAction func stopButtonTapped(_ sender: UIButton) {
         stopTimer()
-        gridController.resetGrid()
+        gridController.resetInitialGrid()
         gameIsInInitialState = true
+        updateViews()
+    }
+    
+    @IBAction func clearGridButtonTapped(_ sender: UIButton) {
+        gridController.clearGrid()
+        gridIsEmpty = true
         updateViews()
     }
     

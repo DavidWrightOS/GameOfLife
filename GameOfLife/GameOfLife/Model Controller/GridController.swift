@@ -17,6 +17,11 @@ class GridController {
     // MARK: - Properties
     
     var grid: Grid {
+        willSet {
+            if generationCount == 0 {
+                initialGrid = grid
+            }
+        }
         didSet {
             updateNextGenerationGridBuffer()
         }
@@ -29,6 +34,7 @@ class GridController {
     var height: Int { grid.height }
     var cellCount: Int { width * height }
     var initialState: InitialState?
+    var initialGrid: Grid
     var delegate: GridControllerDelegate?
     
     // MARK: - Initializers
@@ -39,12 +45,13 @@ class GridController {
         } else {
             self.grid = Grid(width: 25, height: 25)
         }
-        
+        initialGrid = self.grid
         updateNextGenerationGridBuffer()
     }
     
     init(width: Int, height: Int) {
         self.grid = Grid(width: width, height: height)
+        initialGrid = self.grid
         updateNextGenerationGridBuffer()
     }
     
@@ -140,10 +147,15 @@ class GridController {
         grid = newGrid
     }
     
-    func resetGrid() {
+    func clearGrid() {
         grid = Grid(width: width, height: height)
         generationCount = 0
         initialState = nil
+    }
+    
+    func resetInitialGrid() {
+        grid = initialGrid
+        generationCount = 0
     }
     
     func updateGridSize(to newSize: Int) {
