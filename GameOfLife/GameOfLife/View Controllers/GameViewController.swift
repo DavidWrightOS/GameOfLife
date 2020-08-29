@@ -206,3 +206,14 @@ extension GameViewController: InfoViewControllerDelegate {
         }
     }
 }
+
+// MARK: - GridControllerDelegate
+
+extension GameViewController: GridControllerDelegate {
+    func didFinishLoadingNextGeneration() {
+        if shouldLoadNextGeneration {
+            advanceOneGeneration()
+        }
+    }
+}
+

@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol GridControllerDelegate: class {
+    func didFinishLoadingNextGeneration()
+}
+
 class GridController {
     
     // MARK: - Properties
@@ -25,6 +29,7 @@ class GridController {
     var height: Int { grid.height }
     var cellCount: Int { width * height }
     var initialState: InitialState?
+    var delegate: GridControllerDelegate?
     
     // MARK: - Initializers
     
@@ -92,6 +97,7 @@ class GridController {
             
             self.nextGenerationGridBuffer = Grid(width: self.width, height: self.height, cells: nextGenerationCells)
             self.isCalculatingNextGeneration = false
+            self.delegate?.didFinishLoadingNextGeneration()
         }
     }
     
