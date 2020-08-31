@@ -27,6 +27,9 @@ class GameViewController: UIViewController {
             gridSizeHeaderLabel.textColor = gameIsInInitialState ? .systemGray : .darkGray
             stopButton.isEnabled = !gameIsInInitialState
             stopButton.tintColor = gameIsInInitialState ? .disabledButtonColor : .enabledButtonColor
+            if !gameIsInInitialState {
+                clearGridButton.isHidden = gridIsEmpty
+            }
         }
     }
     
