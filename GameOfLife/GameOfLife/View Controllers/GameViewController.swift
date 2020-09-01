@@ -63,7 +63,6 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         advance1StepButton.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.15), for: .disabled)
         stopButton.isEnabled = false
-        gridController.setInitialState(.random)
         updatePresetButtonTitles()
         gameSpeedStepper.value = gameSpeed
         updateGameSpeed()
