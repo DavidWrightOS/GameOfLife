@@ -13,10 +13,24 @@ enum State {
     case dead
 }
 
-struct Cell {
+class Cell {
     var state: State
+    var neighbors: [Cell]!
     
-    init(state: State = .dead) {
+    var aliveNeighborCount: Int {
+        neighbors.filter { $0.state == .alive }.count
+    }
+    
+    var nextState: State {
+        switch aliveNeighborCount {
+        case 3: return .alive
+        case 2 where state == .alive: return .alive
+        default: return .dead
+        }
+    }
+    
+    init(state: State = .dead, neighbors: [Cell]? = nil) {
         self.state = state
+        self.neighbors = neighbors
     }
 }
