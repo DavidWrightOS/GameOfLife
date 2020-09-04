@@ -127,6 +127,16 @@ class Grid {
             cells[i].state = grid.cells[i].state
         }
     }
+    
+    func toggleStateForCellAt(x: Int, y: Int) {
+        let index = y * width + x
+        cells[index].state = cells[index].state == .dead ? .alive : .dead
+    }
+    
+    func setStateForCellAt(x: Int, y: Int, state: State) {
+        let index = y * width + x
+        cells[index].state = state
+    }
 }
 
 extension Grid: CustomStringConvertible {

@@ -42,7 +42,7 @@ class GridView: UIView {
         context?.saveGState()
         
         for (index, cell) in grid.cells.enumerated() where cell.state == .alive {
-            let x = (index + 1) % grid.width
+            let x = (index) % grid.width
             let y = (index - x) / grid.width
             let rect = CGRect(x: CGFloat(x) * cellSize,
                               y: CGFloat(y) * cellSize,

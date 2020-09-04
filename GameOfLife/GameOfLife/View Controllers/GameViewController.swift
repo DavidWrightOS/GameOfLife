@@ -113,34 +113,36 @@ class GameViewController: UIViewController {
     
     // Touch Gestures
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard gameIsInInitialState else { return }
-//        guard let point = touches.first?.location(in: gridView),
-//            gridView.bounds.contains(point) else { return }
-//
-//        let x = Int(point.x / gridView.cellSize)
-//        let y = Int(point.y / gridView.cellSize)
-//
-//        gridController.grid.toggleStateForCellAt(x: x, y: y)
-//        gridView.grid?.toggleStateForCellAt(x: x, y: y)
-//    }
-//
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard gameIsInInitialState else { return }
-//        guard let point = touches.first?.location(in: gridView),
-//            gridView.bounds.contains(point) else { return }
-//
-//        let x = Int(point.x / gridView.cellSize)
-//        let y = Int(point.y / gridView.cellSize)
-//
-//        gridController.grid.setStateForCellAt(x: x, y: y, state: .alive)
-//        gridView.grid?.setStateForCellAt(x: x, y: y, state: .alive)
-//    }
-//
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        guard gameIsInInitialState else { return }
-//        gridIsEmpty = gridController.gridHasOnlyDeadCells
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard gameIsInInitialState else { return }
+        guard let point = touches.first?.location(in: gridView),
+            gridView.bounds.contains(point) else { return }
+
+        let x = Int(point.x / gridView.cellSize)
+        let y = Int(point.y / gridView.cellSize)
+        print("x = \(x), y = \(y)")
+        gridController.grid.toggleStateForCellAt(x: x, y: y)
+        gridView.grid?.toggleStateForCellAt(x: x, y: y)
+        gridView.setNeedsDisplay()
+    }
+
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard gameIsInInitialState else { return }
+        guard let point = touches.first?.location(in: gridView),
+            gridView.bounds.contains(point) else { return }
+        
+        let x = Int(point.x / gridView.cellSize)
+        let y = Int(point.y / gridView.cellSize)
+        print("x = \(x), y = \(y)")
+        gridController.grid.setStateForCellAt(x: x, y: y, state: .alive)
+        gridView.grid?.setStateForCellAt(x: x, y: y, state: .alive)
+        gridView.setNeedsDisplay()
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard gameIsInInitialState else { return }
+        gridIsEmpty = gridController.gridHasOnlyDeadCells
+    }
     
     // MARK: - Timer
     
