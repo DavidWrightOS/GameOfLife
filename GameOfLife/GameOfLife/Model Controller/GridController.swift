@@ -98,18 +98,18 @@ class GridController {
     
     func newGridWithCurrentInitialState(width: Int, height: Int) -> Grid? {
         guard let stateInfo = initialState?.info else { return nil }
-
+        
         let newGrid = Grid(width: width, height: height)
         let dx = (width - stateInfo.width) / 2
         let dy = (height - stateInfo.height) / 2
-
+        
         let centeredCoordinates = stateInfo.aliveCellsCoordinates
             .map { Coordinate(x: $0.x + dx, y: $0.y + dy) }
-
+        
         for coordinate in centeredCoordinates {
-            newGrid[coordinate.y, coordinate.x].state = .alive
+            newGrid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
         }
-
+        
         return newGrid
     }
     
