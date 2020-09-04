@@ -79,14 +79,14 @@ class GridController {
     func updateBuffer() {
         isCalculatingNextGeneration = true
         
-//        DispatchQueue.global(qos: .userInteractive).async {
-        for i in self.grid.cells.indices {
-            self.buffer.cells[i].state = self.grid.cells[i].nextState
+        DispatchQueue.global(qos: .userInteractive).async {
+            for i in self.grid.cells.indices {
+                self.buffer.cells[i].state = self.grid.cells[i].nextState
+            }
+            
+            self.isCalculatingNextGeneration = false
+            self.delegate?.didFinishLoadingNextGeneration()
         }
-        
-        self.isCalculatingNextGeneration = false
-        self.delegate?.didFinishLoadingNextGeneration()
-//        }
     }
     
     func setRandomInitialState() {
@@ -107,8 +107,7 @@ class GridController {
             .map { Coordinate(x: $0.x + dx, y: $0.y + dy) }
 
         for coordinate in centeredCoordinates {
-            let index = coordinate.y * width + coordinate.x
-            newGrid.cells[index].state = .alive
+            newGrid[coordinate.y, coordinate.x].state = .alive
         }
 
         return newGrid

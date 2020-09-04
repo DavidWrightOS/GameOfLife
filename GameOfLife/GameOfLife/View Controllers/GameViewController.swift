@@ -120,9 +120,8 @@ class GameViewController: UIViewController {
 
         let x = Int(point.x / gridView.cellSize)
         let y = Int(point.y / gridView.cellSize)
-        print("x = \(x), y = \(y)")
+        
         gridController.grid.toggleStateForCellAt(x: x, y: y)
-        gridView.grid?.toggleStateForCellAt(x: x, y: y)
         gridView.setNeedsDisplay()
     }
 
@@ -133,9 +132,8 @@ class GameViewController: UIViewController {
         
         let x = Int(point.x / gridView.cellSize)
         let y = Int(point.y / gridView.cellSize)
-        print("x = \(x), y = \(y)")
+        
         gridController.grid.setStateForCellAt(x: x, y: y, state: .alive)
-        gridView.grid?.setStateForCellAt(x: x, y: y, state: .alive)
         gridView.setNeedsDisplay()
     }
 
