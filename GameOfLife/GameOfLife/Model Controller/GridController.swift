@@ -113,10 +113,16 @@ class GridController {
         updateBuffer()
     }
     
-    func newGridWithCurrentInitialState(width: Int, height: Int) -> Grid? {
-        guard let stateInfo = initialState?.info else { return nil }
+    func setInitialState(_ initialState: InitialState) {
+        self.initialState = initialState
+        generationCount = 0
         
-        let newGrid = Grid(width: width, height: height)
+        guard let stateInfo = initialState.info else { setRandomInitialState(); return }
+        
+        for cell in grid.cells {
+            cell.state = .dead
+        }
+        
         let dx = (width - stateInfo.width) / 2
         let dy = (height - stateInfo.height) / 2
         
@@ -124,24 +130,10 @@ class GridController {
             .map { Coordinate(x: $0.x + dx, y: $0.y + dy) }
         
         for coordinate in centeredCoordinates {
-            newGrid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
+            grid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
         }
-        
-        return newGrid
     }
-    
-    func setInitialState(_ initialState: InitialState) {
-        self.initialState = initialState
-        generationCount = 0
         
-        guard let newGrid = newGridWithCurrentInitialState(width: width, height: height) else {
-            setRandomInitialState()
-            return
-        }
-
-        grid = newGrid
-    }
-    
     func clearGrid() {
         for cell in grid.cells {
             cell.state = .dead
@@ -158,24 +150,16 @@ class GridController {
     }
     
     func updateGridSize(to newSize: Int) {
-        guard generationCount == 0 else { return }
-
-        if let initialStateWidth = self.initialState?.info?.width,
-            let initialStateHeight = self.initialState?.info?.height,
-            width < initialStateWidth || height < initialStateHeight,
-            let newGrid = newGridWithCurrentInitialState(width: newSize, height: newSize) {
-            grid = newGrid
-            updateBuffer()
-            return
-        }
-
-        let dx = (newSize - width) / 2
-        let dy = (newSize - height) / 2
-
-        let newGrid = Grid(width: newSize, height: newSize)
-
-        for y in 0..<newSize {
-            for x in 0..<newSize {
+        updateGridSize(width: newSize, height: newSize)
+    }
+    
+    func updateGridSize(width: Int, height: Int) {
+        let newGrid = Grid(width: width, height: height)
+        let dx = (width - self.width) / 2
+        let dy = (height - self.height) / 2
+        
+        for y in 0..<height {
+            for x in 0..<width {
                 let index = indexAt(x: x - dx, y: y - dy)
                 let cellState = grid.indexIsValidAt(index) ? grid.cells[index].state : expandedGridNewCellState()
                 if cellState == .alive {
@@ -184,10 +168,23 @@ class GridController {
             }
         }
         
+        // if initial state extends beyond the bounds of the current grid, redraw the initial state on the new grid
+//        if let stateInfo = initialState?.info, width < stateInfo.width || height < stateInfo.height {
+//            let dx = (width - stateInfo.width) / 2
+//            let dy = (height - stateInfo.height) / 2
+//
+//            let centeredCoordinates = stateInfo.aliveCellsCoordinates
+//                .map { Coordinate(x: $0.x + dx, y: $0.y + dy) }
+//
+//            for coordinate in centeredCoordinates {
+//                newGrid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
+//            }
+//        }
+        
         grid = newGrid
         updateBuffer()
     }
-    
+        
     func indexAt(x: Int, y: Int) -> Int {
         y * width + x
     }
