@@ -13,15 +13,18 @@ class Grid {
     // MARK: - Properties
     
     var cells = [Cell]()
-    let width: Int
-    let height: Int
+    var width: Int
+    var height: Int
     
     // MARK: - Initializer
     
     public init(width: Int = 25, height: Int = 25) {
         self.width = width
         self.height = height
-        
+        self.initializeCells()
+    }
+    
+    func initializeCells() {
         var newCells = [Cell]()
         newCells.reserveCapacity(width * height)
         
@@ -121,7 +124,7 @@ class Grid {
     }
     
     func copyCellStates(from grid: Grid) {
-        guard width == grid.width, height == grid.height else { return }
+        guard isSameSize(as: grid) else { return }
         
         for i in cells.indices {
             cells[i].state = grid.cells[i].state
@@ -136,6 +139,10 @@ class Grid {
     func setStateForCellAt(x: Int, y: Int, state: State) {
         let index = y * width + x
         cells[index].state = state
+    }
+    
+    func isSameSize(as grid: Grid) -> Bool {
+        self.width == grid.width && self.height == grid.height
     }
 }
 
