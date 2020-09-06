@@ -132,6 +132,8 @@ class GridController {
         for coordinate in centeredCoordinates {
             grid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
         }
+        
+        updateBuffer()
     }
         
     func clearGrid() {
@@ -154,7 +156,7 @@ class GridController {
     }
     
     func updateGridSize(width: Int, height: Int) {
-        let newGrid = Grid(width: width, height: height)
+        var newGrid = Grid(width: width, height: height)
         let dx = (width - self.width) / 2
         let dy = (height - self.height) / 2
         
@@ -162,8 +164,9 @@ class GridController {
             for x in 0..<width {
                 let index = indexAt(x: x - dx, y: y - dy)
                 let cellState = grid.indexIsValidAt(index) ? grid.cells[index].state : expandedGridNewCellState()
+                newGrid.setStateForCellAt(x: x, y: y, state: cellState)
                 if cellState == .alive {
-                    newGrid[y, x].state = .alive
+                    newGrid.setStateForCellAt(x: x, y: y, state: .alive)
                 }
             }
         }
@@ -181,7 +184,7 @@ class GridController {
 //            }
 //        }
         
-        grid = newGrid
+        swap(&grid, &newGrid)
         updateBuffer()
     }
         
