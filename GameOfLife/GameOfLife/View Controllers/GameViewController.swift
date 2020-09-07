@@ -12,23 +12,24 @@ class GameViewController: UIViewController {
     
     // MARK: - Properties
 
-    var gridController = GridController(width: 25, height: 25)
+    var gridController = GridController(width: 0, height: 0)
     var gameSpeed = 20.0
     var gridSize = 45
+    var shouldLoadNextGeneration = false
+    var timer: Timer?
+    let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
+    
     var isRunning = false {
         didSet {
             advance1StepButton.isEnabled = !isRunning
         }
     }
-    var shouldLoadNextGeneration = false
-    var timer: Timer?
-    let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
     
     var gameIsInInitialState = true {
         didSet {
             hideSizeStepperView.isHidden = gameIsInInitialState
             stopButton.isEnabled = !gameIsInInitialState
-            stopButton.tintColor = stopButton.isEnabled ? .systemBlue : UIColor.systemBlue.withAlphaComponent(0.25)
+            stopButton.tintColor = stopButton.isEnabled ? .enabledButtonColor : .disabledButtonColor
             clearGridButton.isHidden = gameIsInInitialState ? !gridIsEmpty : true
         }
     }
@@ -38,7 +39,7 @@ class GameViewController: UIViewController {
             clearGridButton.isHidden = gridIsEmpty
             advance1StepButton.isEnabled = !gridIsEmpty
             playPauseButton.isEnabled = !gridIsEmpty
-            playPauseButton.tintColor = playPauseButton.isEnabled ? .systemBlue : UIColor.systemBlue.withAlphaComponent(0.25)
+            playPauseButton.tintColor = playPauseButton.isEnabled ? .enabledButtonColor : .disabledButtonColor
         }
     }
     
@@ -64,8 +65,9 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         hideSizeStepperView.isHidden = true
         hideSizeStepperView.backgroundColor = UIColor.systemBackground
-        advance1StepButton.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.25), for: .disabled)
+        advance1StepButton.setTitleColor(.disabledButtonColor, for: .disabled)
         stopButton.isEnabled = false
+        stopButton.tintColor = .disabledButtonColor
         updatePresetButtonTitles()
         gameSpeedStepper.value = gameSpeed
         updateGameSpeed()
@@ -143,6 +145,7 @@ class GameViewController: UIViewController {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard gameIsInInitialState else { return }
         gridIsEmpty = gridController.gridHasOnlyDeadCells
+        gridController.updateBuffer()
     }
     
     // MARK: - Timer
