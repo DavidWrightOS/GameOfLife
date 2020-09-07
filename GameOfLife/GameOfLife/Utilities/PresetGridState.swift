@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// A coordinate is used to represent the x (i.e. column) and y location of a cell in a grid.
+/// The upper left most cell in a grid has Coordinate values: x = 0, y = 0
+/// The lower right most cell in a grid has Coordinate values: x = (grid.width - 1), y = (grid.height - 1)
 struct Coordinate: Equatable {
     let x: Int
     let y: Int

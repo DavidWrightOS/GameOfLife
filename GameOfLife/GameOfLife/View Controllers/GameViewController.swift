@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
 
     var gridController = GridController(width: 25, height: 25)
     var gameSpeed = 10.0
-    var gridSize = 45
+    var gridSize = 25
     var isRunning = false
     var shouldLoadNextGeneration = false
     var timer: Timer?

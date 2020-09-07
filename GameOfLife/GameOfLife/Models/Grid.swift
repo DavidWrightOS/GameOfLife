@@ -97,14 +97,14 @@ class Grid {
     }
     
     // Uncomment the following code to enable subscript access, Ex: grid[1][3]
-    subscript(row: Int, column: Int) -> Cell {
+    subscript(column: Int, row: Int) -> Cell {
         get {
             assert(indexIsValidAt(x: column, y: row), "Index out of range")
-            return cells[(row * column) + column]
+            return cells[(row * width) + column]
         }
         set {
             assert(indexIsValidAt(x: column, y: row), "Index out of range")
-            cells[(row * column) + column] = newValue
+            cells[(row * width) + column] = newValue
         }
     }
     

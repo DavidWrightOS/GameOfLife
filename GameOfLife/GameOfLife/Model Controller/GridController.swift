@@ -155,34 +155,44 @@ class GridController {
         updateGridSize(width: newSize, height: newSize)
     }
     
-    func updateGridSize(width: Int, height: Int) {
-        var newGrid = Grid(width: width, height: height)
-        let dx = (width - self.width) / 2
-        let dy = (height - self.height) / 2
+    func updateGridSize(width newWidth: Int, height newHeight: Int) {
+        var newGrid = Grid(width: newWidth, height: newHeight)
+        let dx = (newWidth - width) / 2
+        let dy = (newHeight - height) / 2
         
-        for y in 0..<height {
-            for x in 0..<width {
-                let index = indexAt(x: x - dx, y: y - dy)
-                let cellState = grid.indexIsValidAt(index) ? grid.cells[index].state : expandedGridNewCellState()
-                newGrid.setStateForCellAt(x: x, y: y, state: cellState)
-                if cellState == .alive {
-                    newGrid.setStateForCellAt(x: x, y: y, state: .alive)
-                }
+        // Copy cell states from existing grid to newGrid
+        for newY in 0..<newHeight {
+            for newX in 0..<newWidth {
+                
+                // translate the x and y location of the cell in the existing grid to align the centers of both grids
+                let x = newX - dx, y = newY - dy
+                
+                // If the newGrid cell location falls outside of the existing grid's bounds (because the newGrid is larger)
+                // then expandedGridNewCellState will return .dead, or a random state if the initialState property = .random
+                let cellState = grid.indexIsValidAt(x: x, y: y) ? grid[x, y].state : expandedGridNewCellState()
+                newGrid[newX, newY].state = cellState
             }
         }
         
-        // if initial state extends beyond the bounds of the current grid, redraw the initial state on the new grid
-//        if let stateInfo = initialState?.info, width < stateInfo.width || height < stateInfo.height {
-//            let dx = (width - stateInfo.width) / 2
-//            let dy = (height - stateInfo.height) / 2
-//
-//            let centeredCoordinates = stateInfo.aliveCellsCoordinates
-//                .map { Coordinate(x: $0.x + dx, y: $0.y + dy) }
-//
-//            for coordinate in centeredCoordinates {
-//                newGrid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
-//            }
-//        }
+        // If the newGrid is larger than the existing grid, and a preset initial state contains coordinates that do not
+        // fit inside the existing grid's bounds, but do fit inside the new grid's bounds, then update the cells at those locations
+        if newWidth > width, let stateInfo = initialState?.info,
+            width < stateInfo.width || height < stateInfo.height {
+            
+            // Coordinate offsets to center the initial state inside the current grid
+            let dx0 = (width - stateInfo.width) / 2
+            let dy0 = (height - stateInfo.height) / 2
+            
+            // Coordinate offsets to center the initial state inside the newGrid
+            let dx1 = dx0 + dx
+            let dy1 = dy0 + dy
+            
+            let coordinatesToUpdate = stateInfo.aliveCellsCoordinates
+                .filter { !grid.indexIsValidAt(x: $0.x + dx0, y: $0.y + dy0) &&
+                        newGrid.indexIsValidAt(x: $0.x + dx1, y: $0.y + dy1) }
+            
+            coordinatesToUpdate.forEach { newGrid[$0.x + dx1, $0.y + dy1].state = .alive }
+        }
         
         swap(&grid, &newGrid)
         updateBuffer()
