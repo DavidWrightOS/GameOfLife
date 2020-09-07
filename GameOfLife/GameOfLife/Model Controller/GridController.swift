@@ -130,7 +130,8 @@ class GridController {
             .map { Coordinate(x: $0.x + dx, y: $0.y + dy) }
         
         for coordinate in centeredCoordinates {
-            grid.setStateForCellAt(x: coordinate.x, y: coordinate.y, state: .alive)
+            guard grid.indexIsValidAt(x: coordinate.x, y: coordinate.y) else { continue }
+            grid[coordinate.x, coordinate.y].state = .alive
         }
         
         updateBuffer()
@@ -208,5 +209,20 @@ class GridController {
     
     func expandedGridNewCellState() -> State {
         initialState == .random ? randomState() : .dead
+    }
+    
+    func translate(index: Int, fromGridSize: Int, toGridSize: Int) -> Int? {
+        guard fromGridSize != toGridSize else { return index }
+        
+        // (offset, offset) = origin of fromGrid inside toGrid's coordinate system
+        let offset = toGridSize - fromGridSize
+        let x = index % fromGridSize
+        let y = (index - x) / fromGridSize
+        let translatedX = x + offset
+        let translatedY = y + offset
+        let translatedIndex = indexAt(x: translatedX, y: translatedY)
+        
+        guard translatedIndex >= 0, translatedIndex < toGridSize * toGridSize else { return nil }
+        return translatedIndex
     }
 }
