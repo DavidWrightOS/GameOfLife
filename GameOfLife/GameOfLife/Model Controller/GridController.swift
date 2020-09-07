@@ -46,19 +46,19 @@ class GridController {
         if let grid = grid {
             self.grid = grid
             self.buffer = grid.similarGrid()
+            self.initialGrid = grid.similarGrid()
+            self.updateBuffer()
         } else {
             self.grid = Grid(width: 25, height: 25)
             self.buffer = self.grid.similarGrid()
+            self.initialGrid = self.grid.similarGrid()
         }
-        self.initialGrid = self.grid.similarGrid()
-        updateBuffer()
     }
     
     init(width: Int, height: Int) {
         self.grid = Grid(width: width, height: height)
         self.buffer = self.grid.similarGrid()
         self.initialGrid = self.grid.similarGrid()
-        updateBuffer()
     }
     
     // MARK: - Methods

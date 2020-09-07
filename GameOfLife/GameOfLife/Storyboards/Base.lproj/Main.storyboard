@@ -252,6 +252,10 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cVZ-rT-b8t" userLabel="HideSizeStepperView">
+                                <rect key="frame" x="52.666666666666657" y="644" width="94" height="32"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.59883347602739723" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kyF-Pu-KXI">
                                 <rect key="frame" x="284.33333333333331" y="116.33333333333331" width="78.666666666666686" height="30"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
@@ -273,6 +277,7 @@
                             <constraint firstItem="bOh-IL-jh6" firstAttribute="top" relation="greaterThanOrEqual" secondItem="EiJ-6g-1hz" secondAttribute="bottom" constant="-4" id="3El-tf-yPG"/>
                             <constraint firstItem="ot1-9c-ztn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="546-Ul-eS9"/>
                             <constraint firstItem="bOh-IL-jh6" firstAttribute="top" secondItem="EiJ-6g-1hz" secondAttribute="bottom" priority="750" constant="16" id="5hI-1v-T4r"/>
+                            <constraint firstItem="cVZ-rT-b8t" firstAttribute="bottom" secondItem="kbM-2V-E1E" secondAttribute="bottom" id="64x-NS-9U0"/>
                             <constraint firstItem="kyF-Pu-KXI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bOh-IL-jh6" secondAttribute="trailing" constant="8" symbolic="YES" id="70Y-lu-GHF"/>
                             <constraint firstItem="bOh-IL-jh6" firstAttribute="bottom" secondItem="q2N-zF-YYC" secondAttribute="top" constant="-12" id="AVc-g8-kEk"/>
                             <constraint firstItem="kNs-4u-nsb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="0Ry-zM-joZ" secondAttribute="bottom" constant="8" id="BPm-Hu-wco"/>
@@ -282,16 +287,19 @@
                             <constraint firstItem="EiJ-6g-1hz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="FgJ-C2-v6n"/>
                             <constraint firstItem="EiJ-6g-1hz" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="GBT-22-pYi"/>
                             <constraint firstItem="0Ry-zM-joZ" firstAttribute="centerY" secondItem="ot1-9c-ztn" secondAttribute="centerY" multiplier="0.98" id="Nvi-MJ-Z5P"/>
+                            <constraint firstItem="cVZ-rT-b8t" firstAttribute="trailing" secondItem="kbM-2V-E1E" secondAttribute="trailing" id="O0v-k1-Frj"/>
                             <constraint firstItem="kNs-4u-nsb" firstAttribute="top" secondItem="ot1-9c-ztn" secondAttribute="bottom" constant="8" id="PVt-ey-R61"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0Ry-zM-joZ" secondAttribute="trailing" constant="16" id="QQq-ta-5OJ"/>
                             <constraint firstItem="EiJ-6g-1hz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="QzQ-qT-vDp"/>
                             <constraint firstAttribute="bottom" secondItem="kNs-4u-nsb" secondAttribute="bottom" id="Uza-df-sW3"/>
+                            <constraint firstItem="cVZ-rT-b8t" firstAttribute="leading" secondItem="kbM-2V-E1E" secondAttribute="leading" id="VLO-4t-rOn"/>
                             <constraint firstItem="bOh-IL-jh6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="XHe-r9-oIv"/>
                             <constraint firstItem="q2N-zF-YYC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="XZ0-9H-89Y"/>
                             <constraint firstItem="kyF-Pu-KXI" firstAttribute="firstBaseline" secondItem="bOh-IL-jh6" secondAttribute="firstBaseline" id="YZq-u7-sOL"/>
                             <constraint firstItem="ot1-9c-ztn" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bXP-qF-vze"/>
                             <constraint firstItem="q2N-zF-YYC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="dV2-O6-wID"/>
                             <constraint firstItem="kNs-4u-nsb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dZV-52-TNg"/>
+                            <constraint firstItem="cVZ-rT-b8t" firstAttribute="top" secondItem="kbM-2V-E1E" secondAttribute="top" id="isf-tv-lSq"/>
                             <constraint firstItem="a3U-yS-KwN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="12" id="knw-lC-Kak"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="a3U-yS-KwN" secondAttribute="trailing" constant="12" id="l6E-jx-EAn"/>
                             <constraint firstItem="0Ry-zM-joZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="a3U-yS-KwN" secondAttribute="bottom" constant="8" id="lqy-nM-oXp"/>
@@ -313,6 +321,7 @@
                         <outlet property="gridSizeLabel" destination="QFO-Bz-FUt" id="9ee-mm-7G1"/>
                         <outlet property="gridSizeStepper" destination="kbM-2V-E1E" id="Z9P-15-vPC"/>
                         <outlet property="gridView" destination="q2N-zF-YYC" id="dGp-D4-dDN"/>
+                        <outlet property="hideSizeStepperView" destination="cVZ-rT-b8t" id="zIm-4C-k1l"/>
                         <outlet property="playPauseButton" destination="ta5-sM-jPW" id="bSR-Oc-Q3Z"/>
                         <outlet property="speedLabel" destination="7xa-dg-uZ3" id="fGB-P6-XeL"/>
                         <outlet property="stopButton" destination="DQd-Ws-1di" id="SDd-nI-nsh"/>

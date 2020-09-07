@@ -13,24 +13,23 @@ class GameViewController: UIViewController {
     // MARK: - Properties
 
     var gridController = GridController(width: 25, height: 25)
-    var gameSpeed = 10.0
-    var gridSize = 25
-    var isRunning = false
+    var gameSpeed = 20.0
+    var gridSize = 45
+    var isRunning = false {
+        didSet {
+            advance1StepButton.isEnabled = !isRunning
+        }
+    }
     var shouldLoadNextGeneration = false
     var timer: Timer?
     let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
     
     var gameIsInInitialState = true {
         didSet {
-            gridSizeStepper.isEnabled = gameIsInInitialState
-            gridSizeLabel.textColor = gameIsInInitialState ? .label : .darkGray
-            gridSizeHeaderLabel.textColor = gameIsInInitialState ? .systemGray : .darkGray
+            hideSizeStepperView.isHidden = gameIsInInitialState
             stopButton.isEnabled = !gameIsInInitialState
-            stopButton.tintColor = gameIsInInitialState ? .disabledButtonColor : .enabledButtonColor
+            stopButton.tintColor = stopButton.isEnabled ? .systemBlue : UIColor.systemBlue.withAlphaComponent(0.25)
             clearGridButton.isHidden = gameIsInInitialState ? !gridIsEmpty : true
-            if !gameIsInInitialState {
-                clearGridButton.isHidden = true
-            }
         }
     }
     
@@ -39,7 +38,7 @@ class GameViewController: UIViewController {
             clearGridButton.isHidden = gridIsEmpty
             advance1StepButton.isEnabled = !gridIsEmpty
             playPauseButton.isEnabled = !gridIsEmpty
-            playPauseButton.tintColor = gridIsEmpty ? .disabledButtonColor : .enabledButtonColor
+            playPauseButton.tintColor = playPauseButton.isEnabled ? .systemBlue : UIColor.systemBlue.withAlphaComponent(0.25)
         }
     }
     
@@ -57,12 +56,15 @@ class GameViewController: UIViewController {
     @IBOutlet var gameSpeedStepper: UIStepper!
     @IBOutlet var gridSizeStepper: UIStepper!
     @IBOutlet var clearGridButton: UIButton!
+    @IBOutlet var hideSizeStepperView: UIView!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        advance1StepButton.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.15), for: .disabled)
+        hideSizeStepperView.isHidden = true
+        hideSizeStepperView.backgroundColor = UIColor.systemBackground
+        advance1StepButton.setTitleColor(UIColor.systemBlue.withAlphaComponent(0.25), for: .disabled)
         stopButton.isEnabled = false
         updatePresetButtonTitles()
         gameSpeedStepper.value = gameSpeed
@@ -190,6 +192,7 @@ class GameViewController: UIViewController {
     }
     
     @IBAction func advance1StepButtonTapped(_ sender: UIButton) {
+        gameIsInInitialState = false
         advanceOneGeneration()
     }
     
@@ -197,6 +200,7 @@ class GameViewController: UIViewController {
         stopTimer()
         gridController.resetInitialGrid()
         gameIsInInitialState = true
+        gridIsEmpty = gridController.gridHasOnlyDeadCells
         updateViews()
     }
     
