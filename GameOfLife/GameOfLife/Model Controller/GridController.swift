@@ -97,19 +97,13 @@ class GridController {
     }
     
     func finishedCalculatingNextGeneration() {
-        guard buffer.isSameSize(as: grid) else {
-            updateBuffer()
-            return
-        }
-        
+        guard buffer.isSameSize(as: grid) else { updateBuffer(); return }
         isCalculatingNextGeneration = false
         delegate?.didFinishLoadingNextGeneration()
     }
     
     func setRandomInitialState() {
-        for cell in grid.cells {
-            cell.state = randomState()
-        }
+        grid.cells.forEach { $0.state = randomState() }
         updateBuffer()
     }
     
@@ -119,9 +113,7 @@ class GridController {
         
         guard let stateInfo = initialState.info else { setRandomInitialState(); return }
         
-        for cell in grid.cells {
-            cell.state = .dead
-        }
+        grid.cells.forEach { $0.state = .dead }
         
         let dx = (width - stateInfo.width) / 2
         let dy = (height - stateInfo.height) / 2
@@ -138,9 +130,7 @@ class GridController {
     }
         
     func clearGrid() {
-        for cell in grid.cells {
-            cell.state = .dead
-        }
+        grid.cells.forEach { $0.state = .dead }
         generationCount = 0
         initialState = nil
         updateBuffer()
@@ -209,20 +199,5 @@ class GridController {
     
     func expandedGridNewCellState() -> State {
         initialState == .random ? randomState() : .dead
-    }
-    
-    func translate(index: Int, fromGridSize: Int, toGridSize: Int) -> Int? {
-        guard fromGridSize != toGridSize else { return index }
-        
-        // (offset, offset) = origin of fromGrid inside toGrid's coordinate system
-        let offset = toGridSize - fromGridSize
-        let x = index % fromGridSize
-        let y = (index - x) / fromGridSize
-        let translatedX = x + offset
-        let translatedY = y + offset
-        let translatedIndex = indexAt(x: translatedX, y: translatedY)
-        
-        guard translatedIndex >= 0, translatedIndex < toGridSize * toGridSize else { return nil }
-        return translatedIndex
     }
 }
