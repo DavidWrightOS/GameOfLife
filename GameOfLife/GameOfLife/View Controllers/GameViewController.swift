@@ -16,6 +16,7 @@ class GameViewController: UIViewController {
     var gameSpeed = 20.0
     var gridSize = 45
     var shouldLoadNextGeneration = false
+    var isUpdatingGridView = false
     var timer: Timer?
     let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
     
@@ -63,6 +64,8 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        gameSpeedStepper.maximumValue = 100
+        gridSizeStepper.maximumValue = 205
         hideSizeStepperView.isHidden = true
         hideSizeStepperView.backgroundColor = UIColor.systemBackground
         advance1StepButton.setTitleColor(.disabledButtonColor, for: .disabled)
@@ -80,7 +83,12 @@ class GameViewController: UIViewController {
     // MARK: - Methods
     
     func updateViews() {
+        isUpdatingGridView = true
         gridView.grid = gridController.grid
+        isUpdatingGridView = false
+        if shouldLoadNextGeneration {
+            advanceOneGeneration()
+        }
         generationCountLabel.text = "Generation: \(gridController.generationCount)"
     }
     
@@ -106,7 +114,10 @@ class GameViewController: UIViewController {
     
     func advanceOneGeneration() {
         shouldLoadNextGeneration = gridController.isCalculatingNextGeneration
-        guard !gridController.isCalculatingNextGeneration else { return }
+        guard !gridController.isCalculatingNextGeneration && !isUpdatingGridView else {
+            shouldLoadNextGeneration = true
+            return
+        }
         
         // Main thread: swap the grid and buffer properties
         // Background thread: calculate next generation and store in buffer
