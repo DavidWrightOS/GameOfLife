@@ -81,18 +81,33 @@ class GridController {
         
         isCalculatingNextGeneration = true
         
-        DispatchQueue.global(qos: .userInteractive).async {
-            if !self.buffer.isSameSize(as: self.grid) {
-                self.buffer = self.grid.similarGrid()
+        if !self.buffer.isSameSize(as: self.grid) {
+            self.buffer = self.grid.similarGrid()
+        }
+        
+        let dispatchGroup = DispatchGroup()
+        let groupSize = 500 // number of 'buffer' cells that will be updated in each group
+        let cellCount = self.cellCount
+        var index = 0
+        
+        while index < cellCount {
+            dispatchGroup.enter()
+            let startIndex = index
+            DispatchQueue.global(qos: .userInteractive).async(group: dispatchGroup) {
+                let endIndex = min(startIndex + groupSize, cellCount)
+                
+                for i in startIndex..<endIndex {
+                    self.buffer.cells[i].state = self.grid.cells[i].nextState
+                }
+                
+                dispatchGroup.leave()
             }
             
-            for i in self.grid.cells.indices {
-                self.buffer.cells[i].state = self.grid.cells[i].nextState
-            }
-            
-            DispatchQueue.main.async {
-                self.finishedCalculatingNextGeneration()
-            }
+            index += groupSize
+        }
+        
+        dispatchGroup.notify(queue: .main) {
+            self.finishedCalculatingNextGeneration()
         }
     }
     
