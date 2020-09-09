@@ -13,17 +13,22 @@ class GameViewController: UIViewController {
     // MARK: - Properties
 
     var gridController = GridController(width: 0, height: 0)
-    var gameSpeed = 20.0
-    var gridSize = 45
     var shouldLoadNextGeneration = false
     var isUpdatingGridView = false
     var timer: Timer?
     let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
+    let defaults = UserDefaults.standard
+    
+    var gameSpeed = 20.0 {
+        didSet { defaults.set(gameSpeed, forKey: UserDefaultsKey.gameSpeed) }
+    }
+    
+    var gridSize = 45 {
+        didSet { defaults.set(gridSize, forKey: UserDefaultsKey.gridSize) }
+    }
     
     var isRunning = false {
-        didSet {
-            advance1StepButton.isEnabled = !isRunning
-        }
+        didSet { advance1StepButton.isEnabled = !isRunning }
     }
     
     var gameIsInInitialState = true {
@@ -64,23 +69,44 @@ class GameViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadUserSettings()
+        setupGame()
+    }
+    
+    // MARK: - Methods
+    
+    func loadUserSettings() {
+        let gameSpeedSetting = defaults.double(forKey: UserDefaultsKey.gameSpeed)
+        gameSpeed = (gameSpeedSetting != 0.0) ? gameSpeedSetting : gameSpeed
+        
+        let gridSizeSetting = defaults.integer(forKey: UserDefaultsKey.gridSize)
+        gridSize = (gridSizeSetting != 0) ? gridSizeSetting : gridSize
+    }
+    
+    func setupGame() {
+        
+        // Set initial game state
+        gridController.setInitialState(.random)
+        gridSizeStepper.minimumValue = 10
+        gridSizeStepper.maximumValue = 150
+        gridSizeStepper.stepValue = 10
+        gridSizeStepper.value = Double(gridSize)
+        updateGridSize()
+        gameSpeedStepper.minimumValue = 5
         gameSpeedStepper.maximumValue = 100
-        gridSizeStepper.maximumValue = 205
+        gameSpeedStepper.stepValue = 5
+        gameSpeedStepper.value = gameSpeed
+        updateGameSpeed()
+        
+        // Set initial UI state
         hideSizeStepperView.isHidden = true
         hideSizeStepperView.backgroundColor = UIColor.systemBackground
         advance1StepButton.setTitleColor(.disabledButtonColor, for: .disabled)
         stopButton.isEnabled = false
         stopButton.tintColor = .disabledButtonColor
         updatePresetButtonTitles()
-        gameSpeedStepper.value = gameSpeed
-        updateGameSpeed()
-        gridSizeStepper.value = Double(gridSize)
-        updateGridSize()
-        gridController.setInitialState(.random)
-        gridView.grid = gridController.grid
     }
-    
-    // MARK: - Methods
     
     func updateViews() {
         isUpdatingGridView = true
