@@ -18,6 +18,7 @@
 		63668C1B24EBBE0000084403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63668C1924EBBE0000084403 /* Main.storyboard */; };
 		63668C1D24EBBE0200084403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63668C1C24EBBE0200084403 /* Assets.xcassets */; };
 		63668C2024EBBE0200084403 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63668C1E24EBBE0200084403 /* LaunchScreen.storyboard */; };
+		6379C00725087C6100DC4150 /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6379C00625087C6100DC4150 /* UserDefaultsKey.swift */; };
 		6387964224F60BA6005C6BC4 /* PresetGridState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6387964124F60BA6005C6BC4 /* PresetGridState.swift */; };
 		638A8C9624FB0E5D000EFC57 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638A8C9524FB0E5D000EFC57 /* Colors.swift */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		63668C1C24EBBE0200084403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63668C1F24EBBE0200084403 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63668C2124EBBE0200084403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6379C00625087C6100DC4150 /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		6387964124F60BA6005C6BC4 /* PresetGridState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresetGridState.swift; sourceTree = "<group>"; };
 		638A8C9524FB0E5D000EFC57 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +142,7 @@
 			children = (
 				6387964124F60BA6005C6BC4 /* PresetGridState.swift */,
 				638A8C9524FB0E5D000EFC57 /* Colors.swift */,
+				6379C00625087C6100DC4150 /* UserDefaultsKey.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				631E784A24ED10D7006B1155 /* InfoViewController.swift in Sources */,
 				63668C1624EBBE0000084403 /* SceneDelegate.swift in Sources */,
 				631E784E24ED1450006B1155 /* Grid.swift in Sources */,
+				6379C00725087C6100DC4150 /* UserDefaultsKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
