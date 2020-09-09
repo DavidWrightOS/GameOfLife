@@ -19,6 +19,7 @@ class GridController {
     var grid: Grid
     var buffer: Grid
     var isCalculatingNextGeneration = false
+    var shouldUpdateBuffer = false
     var generationCount = 0
     var width: Int { grid.width }
     var height: Int { grid.height }
@@ -34,8 +35,7 @@ class GridController {
             guard grid.cells[middleIndex - offset].state == .dead else { return false }
             guard grid.cells[middleIndex + offset].state == .dead else { return false }
         }
-        guard grid.cells.first?.state == .dead,
-            grid.cells.last?.state == .dead else { return false }
+        guard grid.cells.first?.state == .dead, grid.cells.last?.state == .dead else { return false }
         
         return true
     }
@@ -43,16 +43,11 @@ class GridController {
     // MARK: - Initializers
     
     init(grid: Grid? = nil) {
-        if let grid = grid {
-            self.grid = grid
-            self.buffer = grid.similarGrid()
-            self.initialGrid = grid.similarGrid()
-            self.updateBuffer()
-        } else {
-            self.grid = Grid(width: 25, height: 25)
-            self.buffer = self.grid.similarGrid()
-            self.initialGrid = self.grid.similarGrid()
-        }
+        let grid = grid ?? Grid(width: 0, height: 0)
+        self.grid = grid
+        self.buffer = grid.similarGrid()
+        self.initialGrid = grid.similarGrid()
+        self.updateBuffer()
     }
     
     init(width: Int, height: Int) {
@@ -77,16 +72,20 @@ class GridController {
     }
     
     func updateBuffer() {
-        guard !isCalculatingNextGeneration else { return }
+        guard !isCalculatingNextGeneration else {
+            shouldUpdateBuffer = true
+            return
+        }
         
         isCalculatingNextGeneration = true
+        shouldUpdateBuffer = false
         
         if !self.buffer.isSameSize(as: self.grid) {
             self.buffer = self.grid.similarGrid()
         }
         
         let dispatchGroup = DispatchGroup()
-        let groupSize = 500 // number of 'buffer' cells that will be updated in each group
+        let groupSize = 500 // number of cells that will be updated in each dispatchGroup
         let cellCount = self.cellCount
         var index = 0
         
@@ -112,8 +111,8 @@ class GridController {
     }
     
     func finishedCalculatingNextGeneration() {
-        guard buffer.isSameSize(as: grid) else { updateBuffer(); return }
         isCalculatingNextGeneration = false
+        guard buffer.isSameSize(as: grid), !shouldUpdateBuffer else { updateBuffer(); return }
         delegate?.didFinishLoadingNextGeneration()
     }
     
