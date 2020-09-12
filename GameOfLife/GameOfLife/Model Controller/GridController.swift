@@ -14,19 +14,12 @@ protocol GridControllerDelegate: class {
 
 class GridController {
     
-    // MARK: - Properties
+    // MARK: - Public Properties
     
     var grid: Grid
-    var buffer: Grid
-    var isCalculatingNextGeneration = false
-    var shouldUpdateBuffer = false
     var generationCount = 0
-    var width: Int { grid.width }
-    var height: Int { grid.height }
-    var cellCount: Int { width * height }
-    var initialState: InitialState?
-    var initialGrid: Grid
-    var delegate: GridControllerDelegate?
+    var isCalculatingNextGeneration = false
+    weak var delegate: GridControllerDelegate?
     
     var gridHasOnlyDeadCells: Bool {
         // Start checking from the middle of the grid first because it is more likely to contain live cells
@@ -36,27 +29,28 @@ class GridController {
             guard grid.cells[middleIndex + offset].state == .dead else { return false }
         }
         guard grid.cells.first?.state == .dead, grid.cells.last?.state == .dead else { return false }
-        
         return true
     }
     
-    // MARK: - Initializers
+    // MARK: - Private Properties
     
-    init(grid: Grid? = nil) {
-        let grid = grid ?? Grid(width: 0, height: 0)
-        self.grid = grid
-        self.buffer = grid.similarGrid()
-        self.initialGrid = grid.similarGrid()
-        self.updateBuffer()
-    }
+    private var buffer: Grid
+    private var shouldUpdateBuffer = false
+    private var initialState: InitialState?
+    private var initialGrid: Grid
+    private var width: Int { grid.width }
+    private var height: Int { grid.height }
+    private var cellCount: Int { width * height }
+    
+    // MARK: - Initializers
     
     init(width: Int, height: Int) {
         self.grid = Grid(width: width, height: height)
-        self.buffer = self.grid.similarGrid()
-        self.initialGrid = self.grid.similarGrid()
+        self.buffer = Grid(width: width, height: height)
+        self.initialGrid = Grid(width: width, height: height)
     }
     
-    // MARK: - Methods
+    // MARK: - Public Methods
     
     func loadNextGeneration() {
         if generationCount == 0 {
@@ -81,7 +75,7 @@ class GridController {
         shouldUpdateBuffer = false
         
         if !self.buffer.isSameSize(as: self.grid) {
-            self.buffer = self.grid.similarGrid()
+            self.buffer = self.grid.newGridWithSameSize()
         }
         
         let dispatchGroup = DispatchGroup()
@@ -108,17 +102,6 @@ class GridController {
         dispatchGroup.notify(queue: .main) {
             self.finishedCalculatingNextGeneration()
         }
-    }
-    
-    func finishedCalculatingNextGeneration() {
-        isCalculatingNextGeneration = false
-        guard buffer.isSameSize(as: grid), !shouldUpdateBuffer else { updateBuffer(); return }
-        delegate?.didFinishLoadingNextGeneration()
-    }
-    
-    func setRandomInitialState() {
-        grid.cells.forEach { $0.state = randomState() }
-        updateBuffer()
     }
     
     func setInitialState(_ initialState: InitialState) {
@@ -160,7 +143,36 @@ class GridController {
         updateGridSize(width: newSize, height: newSize)
     }
     
-    func updateGridSize(width newWidth: Int, height newHeight: Int) {
+    func toggleStateForCellAt(x: Int, y: Int) {
+        grid[x, y].state = grid[x, y].state == .dead ? .alive : .dead
+    }
+    
+    func setStateForCellAt(x: Int, y: Int, state: State) {
+        grid[x, y].state = state
+    }
+    
+    // MARK: - Private Methods
+    
+    private func finishedCalculatingNextGeneration() {
+        isCalculatingNextGeneration = false
+        guard buffer.isSameSize(as: grid), !shouldUpdateBuffer else { updateBuffer(); return }
+        delegate?.didFinishLoadingNextGeneration()
+    }
+    
+    private func setRandomInitialState() {
+        grid.cells.forEach { $0.state = randomState() }
+        updateBuffer()
+    }
+    
+    private func randomState() -> State {
+        Int.random(in: 0...5) == 0 ? .alive : .dead
+    }
+    
+    private func expandedGridNewCellState() -> State {
+        initialState == .random ? randomState() : .dead
+    }
+    
+    private func updateGridSize(width newWidth: Int, height newHeight: Int) {
         var newGrid = Grid(width: newWidth, height: newHeight)
         let dx = (newWidth - width) / 2
         let dy = (newHeight - height) / 2
@@ -201,17 +213,5 @@ class GridController {
         
         swap(&grid, &newGrid)
         updateBuffer()
-    }
-        
-    func indexAt(x: Int, y: Int) -> Int {
-        y * width + x
-    }
-    
-    func randomState() -> State {
-        Int.random(in: 0...5) == 0 ? .alive : .dead
-    }
-    
-    func expandedGridNewCellState() -> State {
-        initialState == .random ? randomState() : .dead
     }
 }

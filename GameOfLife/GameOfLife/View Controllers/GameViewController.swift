@@ -12,26 +12,26 @@ class GameViewController: UIViewController {
     
     // MARK: - Properties
 
-    var gridController = GridController(width: 0, height: 0)
-    var shouldLoadNextGeneration = false
-    var isUpdatingGridView = false
-    var timer: Timer?
-    let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
-    let defaults = UserDefaults.standard
+    private var gridController = GridController(width: 0, height: 0)
+    private var shouldLoadNextGeneration = false
+    private var isUpdatingGridView = false
+    private var timer: Timer?
+    private let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
+    private let defaults = UserDefaults.standard
     
-    var gameSpeed = 20.0 {
+    private var gameSpeed = 20.0 {
         didSet { defaults.set(gameSpeed, forKey: UserDefaultsKey.gameSpeed) }
     }
     
-    var gridSize = 45 {
+    private var gridSize = 45 {
         didSet { defaults.set(gridSize, forKey: UserDefaultsKey.gridSize) }
     }
     
-    var isRunning = false {
+    private var isRunning = false {
         didSet { advance1StepButton.isEnabled = !isRunning }
     }
     
-    var gameIsInInitialState = true {
+    private var gameIsInInitialState = true {
         didSet {
             hideSizeStepperView.isHidden = gameIsInInitialState
             stopButton.isEnabled = !gameIsInInitialState
@@ -40,7 +40,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    var gridIsEmpty = false {
+    private var gridIsEmpty = false {
         didSet {
             clearGridButton.isHidden = gridIsEmpty
             advance1StepButton.isEnabled = !gridIsEmpty
@@ -49,26 +49,35 @@ class GameViewController: UIViewController {
         }
     }
     
+    private lazy var infoViewController: InfoViewController = {
+        let infoVC = UIStoryboard(name: "Main", bundle: nil)
+            .instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
+        infoVC.delegate = self
+        return infoVC
+    }()
+    
     // MARK: - IBOutlets
     
-    @IBOutlet var gridView: GridView!
-    @IBOutlet var generationCountLabel: UILabel!
-    @IBOutlet var playPauseButton: UIButton!
-    @IBOutlet var advance1StepButton: UIButton!
-    @IBOutlet var stopButton: UIButton!
-    @IBOutlet var speedLabel: UILabel!
-    @IBOutlet var gridSizeHeaderLabel: UILabel!
-    @IBOutlet var gridSizeLabel: UILabel!
-    @IBOutlet var presetButtons: [UIButton]!
-    @IBOutlet var gameSpeedStepper: UIStepper!
-    @IBOutlet var gridSizeStepper: UIStepper!
-    @IBOutlet var clearGridButton: UIButton!
-    @IBOutlet var hideSizeStepperView: UIView!
+    @IBOutlet private var gridView: GridView!
+    @IBOutlet private var generationCountLabel: UILabel!
+    @IBOutlet private var playPauseButton: UIButton!
+    @IBOutlet private var advance1StepButton: UIButton!
+    @IBOutlet private var stopButton: UIButton!
+    @IBOutlet private var speedLabel: UILabel!
+    @IBOutlet private var gridSizeHeaderLabel: UILabel!
+    @IBOutlet private var gridSizeLabel: UILabel!
+    @IBOutlet private var presetButtons: [UIButton]!
+    @IBOutlet private var gameSpeedStepper: UIStepper!
+    @IBOutlet private var gridSizeStepper: UIStepper!
+    @IBOutlet private var clearGridButton: UIButton!
+    @IBOutlet private var hideSizeStepperView: UIView!
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        gridController.delegate = self
         
         loadUserSettings()
         setupGame()
@@ -76,7 +85,7 @@ class GameViewController: UIViewController {
     
     // MARK: - Methods
     
-    func loadUserSettings() {
+    private func loadUserSettings() {
         let gameSpeedSetting = defaults.double(forKey: UserDefaultsKey.gameSpeed)
         gameSpeed = (gameSpeedSetting != 0.0) ? gameSpeedSetting : gameSpeed
         
@@ -84,7 +93,7 @@ class GameViewController: UIViewController {
         gridSize = (gridSizeSetting != 0) ? gridSizeSetting : gridSize
     }
     
-    func setupGame() {
+    private func setupGame() {
         
         // Set initial game state
         gridController.setInitialState(.random)
@@ -108,7 +117,7 @@ class GameViewController: UIViewController {
         updatePresetButtonTitles()
     }
     
-    func updateViews() {
+    private func updateViews() {
         isUpdatingGridView = true
         gridView.grid = gridController.grid
         isUpdatingGridView = false
@@ -118,28 +127,29 @@ class GameViewController: UIViewController {
         generationCountLabel.text = "Generation: \(gridController.generationCount)"
     }
     
-    func updateGameSpeed() {
+    private func updateGameSpeed() {
         speedLabel.text = "\(Int(gameSpeed))"
         guard isRunning else { return }
         cancelTimer()
         startTimer()
     }
     
-    func updateGridSize() {
+    private func updateGridSize() {
         gridSizeLabel.text = "\(gridSize) x \(gridSize)"
         gridController.updateGridSize(to: gridSize)
         updateViews()
     }
     
-    func updatePresetButtonTitles() {
+    private func updatePresetButtonTitles() {
         for button in presetButtons {
             let presetDisplayName = presetStates[button.tag].info?.displayName ?? "Random"
             button.setTitle(presetDisplayName, for: .normal)
         }
     }
     
-    func advanceOneGeneration() {
+    private func advanceOneGeneration() {
         shouldLoadNextGeneration = gridController.isCalculatingNextGeneration
+        
         guard !gridController.isCalculatingNextGeneration && !isUpdatingGridView else {
             shouldLoadNextGeneration = true
             return
@@ -153,7 +163,7 @@ class GameViewController: UIViewController {
         updateViews()
     }
     
-    // Touch Gestures
+    // MARK: - Touch Gestures
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard gameIsInInitialState else { return }
@@ -163,7 +173,7 @@ class GameViewController: UIViewController {
         let x = Int(point.x / gridView.cellSize)
         let y = Int(point.y / gridView.cellSize)
         
-        gridController.grid.toggleStateForCellAt(x: x, y: y)
+        gridController.toggleStateForCellAt(x: x, y: y)
         gridView.setNeedsDisplay()
     }
 
@@ -175,7 +185,7 @@ class GameViewController: UIViewController {
         let x = Int(point.x / gridView.cellSize)
         let y = Int(point.y / gridView.cellSize)
         
-        gridController.grid.setStateForCellAt(x: x, y: y, state: .alive)
+        gridController.setStateForCellAt(x: x, y: y, state: .alive)
         gridView.setNeedsDisplay()
     }
 
@@ -187,21 +197,20 @@ class GameViewController: UIViewController {
     
     // MARK: - Timer
     
-    func startTimer() {
+    private func startTimer() {
         timer?.invalidate()
-        
         timer = Timer.scheduledTimer(withTimeInterval: 1.0 / gameSpeed, repeats: true) { [weak self] _ in
             guard let self = self else { return }
             self.advanceOneGeneration()
         }
     }
     
-    func cancelTimer() {
+    private func cancelTimer() {
         timer?.invalidate()
         timer = nil
     }
     
-    func stopTimer() {
+    private func stopTimer() {
         cancelTimer()
         isRunning = false
         playPauseButton.isSelected = false
@@ -209,17 +218,14 @@ class GameViewController: UIViewController {
     
     // MARK: - IBActions
     
-    @IBAction func infoButtonTapped(_ sender: UIButton) {
+    @IBAction private func infoButtonTapped(_ sender: UIButton) {
         cancelTimer()
-        let infoVC = UIStoryboard(name: "Main", bundle: nil)
-            .instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
-        infoVC.delegate = self
-        present(infoVC, animated: true, completion: nil)
+        present(infoViewController, animated: true, completion: nil)
     }
     
     // Game Controls
     
-    @IBAction func playPauseButtonTapped(_ sender: UIButton) {
+    @IBAction private func playPauseButtonTapped(_ sender: UIButton) {
         isRunning.toggle()
         playPauseButton.isSelected = isRunning
         if isRunning {
@@ -231,12 +237,12 @@ class GameViewController: UIViewController {
         }
     }
     
-    @IBAction func advance1StepButtonTapped(_ sender: UIButton) {
+    @IBAction private func advance1StepButtonTapped(_ sender: UIButton) {
         gameIsInInitialState = false
         advanceOneGeneration()
     }
     
-    @IBAction func stopButtonTapped(_ sender: UIButton) {
+    @IBAction private func stopButtonTapped(_ sender: UIButton) {
         stopTimer()
         gridController.resetInitialGrid()
         gameIsInInitialState = true
@@ -244,7 +250,7 @@ class GameViewController: UIViewController {
         updateViews()
     }
     
-    @IBAction func clearGridButtonTapped(_ sender: UIButton) {
+    @IBAction private func clearGridButtonTapped(_ sender: UIButton) {
         gridController.clearGrid()
         gridIsEmpty = true
         updateViews()
@@ -252,7 +258,7 @@ class GameViewController: UIViewController {
     
     // Steppers
     
-    @IBAction func gridSizeStepperValueChanged(_ sender: UIStepper) {
+    @IBAction private func gridSizeStepperValueChanged(_ sender: UIStepper) {
         let oldGridSize = gridSize
         gridSize = Int(sender.value)
         updateGridSize()
@@ -261,14 +267,14 @@ class GameViewController: UIViewController {
         }
     }
     
-    @IBAction func gameSpeedStepperValueChanged(_ sender: UIStepper) {
+    @IBAction private func gameSpeedStepperValueChanged(_ sender: UIStepper) {
         gameSpeed = sender.value
         updateGameSpeed()
     }
     
     // Preset Buttons
     
-    @IBAction func presetButtonTapped(_ sender: UIButton) {
+    @IBAction private func presetButtonTapped(_ sender: UIButton) {
         stopTimer()
         gridController.setInitialState(presetStates[sender.tag])
         gameIsInInitialState = true

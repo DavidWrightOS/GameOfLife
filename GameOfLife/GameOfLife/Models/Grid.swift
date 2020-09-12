@@ -24,7 +24,54 @@ class Grid {
         self.initializeCells()
     }
     
-    func initializeCells() {
+    // MARK: - Public Methods
+    
+    func indexIsValidAt(x: Int, y: Int) -> Bool {
+        x >= 0 && x < width && y >= 0 && y < height
+    }
+    
+    // Uncomment the following code to enable subscript access, Ex: grid[1][3]
+    subscript(column: Int, row: Int) -> Cell {
+        get {
+            assert(indexIsValidAt(x: column, y: row), "Index out of range")
+            return cells[(row * width) + column]
+        }
+        set {
+            assert(indexIsValidAt(x: column, y: row), "Index out of range")
+            cells[(row * width) + column] = newValue
+        }
+    }
+    
+    func copy() -> Grid {
+        let copiedGrid = Grid(width: width, height: height)
+        for index in cells.indices {
+            copiedGrid.cells[index].state = cells[index].state
+        }
+        return copiedGrid
+    }
+    
+    /// Returns a new grid with the same width and height, but all cells are in the 'dead' state
+    /// This is faster than the copy() method. Use similarGrid() when initializing a new grid with the same
+    /// width and height as the receiver, and you do not need to copy all of the cell states to the new grid.
+    func newGridWithSameSize() -> Grid {
+        Grid(width: width, height: height)
+    }
+    
+    func copyCellStates(from grid: Grid) {
+        guard isSameSize(as: grid) else { return }
+        
+        for i in cells.indices {
+            cells[i].state = grid.cells[i].state
+        }
+    }
+    
+    func isSameSize(as grid: Grid) -> Bool {
+        self.width == grid.width && self.height == grid.height
+    }
+    
+    // MARK: - Private Methods
+    
+    private func initializeCells() {
         var newCells = [Cell]()
         newCells.reserveCapacity(width * height)
         
@@ -85,66 +132,9 @@ class Grid {
         }
         self.cells = newCells
     }
-    
-    // MARK: - Methods
-    
-    func indexIsValidAt(_ index: Int) -> Bool {
-        index >= 0 && index < width * height
-    }
-    
-    func indexIsValidAt(x: Int, y: Int) -> Bool {
-        x >= 0 && x < width && y >= 0 && y < height
-    }
-    
-    // Uncomment the following code to enable subscript access, Ex: grid[1][3]
-    subscript(column: Int, row: Int) -> Cell {
-        get {
-            assert(indexIsValidAt(x: column, y: row), "Index out of range")
-            return cells[(row * width) + column]
-        }
-        set {
-            assert(indexIsValidAt(x: column, y: row), "Index out of range")
-            cells[(row * width) + column] = newValue
-        }
-    }
-    
-    func copy() -> Grid {
-        let copiedGrid = Grid(width: width, height: height)
-        for index in cells.indices {
-            copiedGrid.cells[index].state = cells[index].state
-        }
-        return copiedGrid
-    }
-    
-    /// Returns a new grid with the same width and height, but all cells are in the 'dead' state
-    /// This is faster than the copy() method. Use similarGrid() when initializing a new grid with the same
-    /// width and height as the receiver, and you do not need to copy all of the cell states to the new grid.
-    func similarGrid() -> Grid {
-        Grid(width: width, height: height)
-    }
-    
-    func copyCellStates(from grid: Grid) {
-        guard isSameSize(as: grid) else { return }
-        
-        for i in cells.indices {
-            cells[i].state = grid.cells[i].state
-        }
-    }
-    
-    func toggleStateForCellAt(x: Int, y: Int) {
-        let index = y * width + x
-        cells[index].state = cells[index].state == .dead ? .alive : .dead
-    }
-    
-    func setStateForCellAt(x: Int, y: Int, state: State) {
-        let index = y * width + x
-        cells[index].state = state
-    }
-    
-    func isSameSize(as grid: Grid) -> Bool {
-        self.width == grid.width && self.height == grid.height
-    }
 }
+
+// MARK: - CustomStringConvertible
 
 extension Grid: CustomStringConvertible {
     var description: String {
@@ -155,6 +145,8 @@ extension Grid: CustomStringConvertible {
         return description + "\n"
     }
 }
+
+// MARK: - Equatable
 
 extension Grid: Equatable {
     static func == (lhs: Grid, rhs: Grid) -> Bool {
