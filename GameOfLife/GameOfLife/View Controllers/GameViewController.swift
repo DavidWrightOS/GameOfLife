@@ -298,7 +298,7 @@ extension GameViewController: InfoViewControllerDelegate {
 
 extension GameViewController: GridControllerDelegate {
     func didFinishLoadingNextGeneration() {
-        if shouldLoadNextGeneration {
+        if shouldLoadNextGeneration && !gameIsInInitialState {
             advanceOneGeneration()
         }
     }
