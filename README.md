@@ -11,7 +11,8 @@ aspects of computer science and nature.
 
 [from Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns)
 
-## App Screenshots
+
+# Screenshots
 
 ![screenshot](resources/screenshot-1.png)
 ![screenshot](resources/screenshot-2.png)
@@ -20,32 +21,7 @@ aspects of computer science and nature.
 
 This is a solo project.
 
-## Objectives
-
-* Student should be able to create a unique, high-quality project that
-  can be added to a professional portfolio
-* [Student should be able to describe the rules of Conway’s “Game of
-  Life”](objectives/rules-game-life)
-* [Student should be able to explain what cellular automata are and
-  describe how they are useful in real
-  life](objectives/explain-describe-ca)
-* [Student should be able to correctly analyze the ‘Turing Completeness’
-  of Conway’s “Game of Life”](objectives/turing-complete)
-* Student should be able to implement a visualization of Conway’s “Game
-  of Life” using technologies related to their specific
-  track.
-* [Student should be able to utilize "double buffering" to implement
-  the game](objectives/double-buffer)
-
 ## MVP Features
-
-### Preliminary Work
-
-* Research Conway’s "Game of Life". Figure out how it works, why it’s
-  useful, and how the notion of Turing Completeness is related to this
-  topic.
-
-### Building Your App
 
 #### Visualizing the "Game of Life"
 
@@ -94,99 +70,16 @@ Write an algorithm that:
 
 Implement at least 3 of the following features:
 
-* Create a few sample cell configurations that users can load and run
-* Add an option that creates a random cell configuration that users can
+- [x] Create a few sample cell configurations that users can load and run
+- [x] Add an option that creates a random cell configuration that users can
   run
-* Add additional cell properties, like color or size, and incorporate
-  them into your visualization
-* Allow users to specify the speed of the simulation
-* Provide functionality to manually step through the simulation one
+- [x] Allow users to specify the speed of the simulation
+- [x] Provide functionality to manually step through the simulation one
   generation at a time, as opposed to animating automatically
-* Allow users to change the dimension of the grid being displayed
-* Given a specific generation, calculate the configuration of cells at
-  that point in time, and jump to that state, bypassing animation (i.e.
-  skip ahead _n_ generations).
-* If you have an idea for a custom feature on this list, run it by your
-  TL or instructor
+- [x] Allow users to change the dimension of the grid being displayed
 
 #### About
 
 * On the main entry point of the application, include a separate section
   or link to another page or popup that describes the two main rules
   (birth & death) of Conway’s Game of Life
-
-## Stretch Goals
-
-* Implement 2+ additional custom features, above
-* Deploy your app to TestFlight (or the App Store!).
-* Write a how-to guide or blog post that walks readers through the
-  work you did to implement your project
-* Expand your simulation into the third dimension. Google `3D Conways
-  Life`. Google for how to do 3D stuff on your platform. You might look at [SceneKit](https://developer.apple.com/scenekit/).
-* Explore alternate algorithms for finding the nth generation, such
-  as [Hashlife](https://en.wikipedia.org/wiki/Hashlife)
-
-## Sample Wireframe
-
-![wireframe](resources/game-of-life-iOS-mock-1.png)
-![wireframe](resources/game-of-life-iOS-mock-2.png)
-
-
-## Code and Repo Quality
-
-Though this is not currently a requirement, it is a strong suggestion.
-
-### Code
-
-* Make your code look sharp and professional if you think anyone will
-  see it.
-  * Comments that say what part of the problem a function or block of
-    code solves.
-    * Only comment on what a single line does if that single line is
-      unclear.
-  * Blank lines to visually break up logical sections of code, analogous
-    to paragraph breaks.
-
-### Repo
-
-* Well-organized directories.
-* Good file names that let a reader quickly determine which file is
-  where.
-* Good `README.md` files that help the reader with code navigation and
-  installation.
-  * What is the project?
-  * What problem does it solve?
-  * Exceptional difficulties and solutions, if any.
-  * TODO list/wishlist. What do you want to add to it if you have more
-    time?
-
-## Rubric
-
-**Your simulation will receive a 2 when it satisfies the following:**
-
-   1. Display includes a text area that shows the current generation of
-      cells being displayed
-   2. Display includes a grid of cells, at least 25x25, that can be
-      toggled to be _alive_ or _dead_
-   3. Display includes working buttons that start / stop the animation
-      and clear the grid
-   4. Algorithm to generate new generations of cells correctly
-      implemented
-   5. At least 3 features from ***Custom Features*** section
-      successfully implemented
-   6. Application includes a section outlining the rules to Conway's
-      "Game of Life"
-
-**Your simulation will receive a 3 when it satisfies all of the above
-requirements AND implements one of the above stretch goals.**
-
-## Track-Specific Help
-
-Channels for help that's about your specific technologies, if the TLs
-and/or instructor doesn't have enough knowledge in that area.
-
-* #ios_help
-
-## Additional Resources
-
-* [Resources](resources/)
