@@ -13,8 +13,8 @@ class GameViewController: UIViewController {
     // MARK: - Properties
 
     var gridController = GridController(width: 25, height: 25)
-    var gameSpeed = 10.0
-    var gridSize = 25
+    var gameSpeed = 100.0
+    var gridSize = 80
     var isRunning = false
     var timer: Timer?
     let presetStates: [InitialState] = [.random, .acorn, .pulsar, .gliderGun]
