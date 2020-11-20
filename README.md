@@ -11,6 +11,11 @@ aspects of computer science and nature.
 
 [from Wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Examples_of_patterns)
 
+## App Screenshots
+
+![screenshot](resources/screenshot-1.png)
+![screenshot](resources/screenshot-2.png)
+
 ## Collaboration
 
 This is a solo project.
