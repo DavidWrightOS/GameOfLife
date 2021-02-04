@@ -80,6 +80,6 @@ Implement at least 3 of the following features:
 
 #### About
 
-* On the main entry point of the application, include a separate section
+- [x] On the main entry point of the application, include a separate section
   or link to another page or popup that describes the two main rules
   (birth & death) of Conway’s Game of Life
