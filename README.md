@@ -1,6 +1,6 @@
-# Cellular Automata and Conway's "Game of Life"
-
+# Game of Life
 ---
+#### Cellular Automata and Conway's "Game of Life"
 
 Welcome to John Conway's "Game of Life"! This is a computer science
 classic from 1970, a program that simulates a _cellular automaton_
